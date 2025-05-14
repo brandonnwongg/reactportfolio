@@ -1,11 +1,5 @@
-import { Environment } from "@react-three/drei";
-import { Avatar } from "./components/Avatar";
+import { StartingScreen } from "./components/StartingScreen";
 
 export const Experience = () => {
-  return (
-    <>
-      <Environment preset="city" />
-      <Avatar />
-    </>
-  );
+  return <StartingScreen />;
 };
