@@ -1,8 +1,9 @@
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Scroll, ScrollControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Avatar } from "./components/Avatar";
 import { MacBookPro } from "./components/MacBookPro";
 import { Experience } from "./Experience";
+import { PortfolioInterface } from "./components/PortfolioInterface";
 
 function App() {
   return (
@@ -11,9 +12,12 @@ function App() {
       <fog attach="fog" args={["#000000", 10, 50]} />
       <OrbitControls />
       <ambientLight intensity={2} />
-      <Experience />
+      {/* <Experience />
       <Avatar />
-      <MacBookPro />
+      <MacBookPro /> */}
+      <Scroll html>
+        <PortfolioInterface />
+      </Scroll>
     </Canvas>
   );
 }

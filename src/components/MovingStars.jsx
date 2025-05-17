@@ -13,7 +13,7 @@ export const MovingStars = ({ nbParticles = 1000 }) => {
         rotation: [0, randFloat(0, Math.PI * 2), 0],
         size: randFloat(0.01, 0.1),
         lifetime: randFloat(1, 6),
-        speed: randFloat(0.1, 0.2),
+        speed: randFloat(0.05, 0.08),
       })),
     []
   );
