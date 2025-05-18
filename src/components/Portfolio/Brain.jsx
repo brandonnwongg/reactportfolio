@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import * as THREE from "three";
 import { extend, useFrame, useThree } from "@react-three/fiber";
-import { shaderMaterial } from "@react-three/drei";
+import { shaderMaterial, Float } from "@react-three/drei";
 import { data } from "./data";
 
 const PATHS = data.economics[0].paths;
@@ -221,10 +221,21 @@ const BrainParticleMaterial = shaderMaterial(
 extend({ BrainParticleMaterial });
 
 export const Brain = () => {
+  const brainGroup = useRef();
+
+  useFrame(() => {
+    if (brainGroup.current) {
+      brainGroup.current.rotation.y += 0.002;
+    }
+  });
   return (
     <>
-      <Tubes allthecurve={brainCurves} />
-      <BrainParticles allthecurve={brainCurves} />
+      <group ref={brainGroup} position={[0, 2, 0]} scale={5}>
+        <Float floatIntensity={0.2} speed={2}>
+          <Tubes allthecurve={brainCurves} />
+          <BrainParticles allthecurve={brainCurves} />
+        </Float>
+      </group>
     </>
   );
 };
