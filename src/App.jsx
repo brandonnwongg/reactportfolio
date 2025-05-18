@@ -11,7 +11,8 @@ function App() {
   return (
     <Canvas camera={{ position: [0, 2, 5], fov: 60 }}>
       <color attach="background" args={["#000000"]} />
-      <fog attach="fog" args={["#000000", 10, 50]} />
+      {/* <fog attach="fog" args={["#000000", 10, 50]} /> */}
+      <ambientLight />
       <OrbitControls />
       <ambientLight intensity={2} />
       {/* <Experience /> */}
