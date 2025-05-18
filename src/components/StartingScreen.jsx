@@ -4,7 +4,7 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useRef } from "react";
 import { MovingStars } from "./MovingStars";
 import { StaticStars } from "./StaticStars";
-
+import { Box } from "./Box";
 // "Low Poly Winter Scene" (https://skfb.ly/6R6MM) by EdwiixGG is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
 export const StartingScreen = () => {
@@ -17,6 +17,7 @@ export const StartingScreen = () => {
 
   return (
     <>
+      <Box />
       <StaticStars nbParticles={1000} />
       <MovingStars nbParticles={800} />
       <OrbitControls

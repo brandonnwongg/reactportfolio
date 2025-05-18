@@ -4,6 +4,8 @@ import { Avatar } from "./components/Avatar";
 import { MacBookPro } from "./components/MacBookPro";
 import { Experience } from "./Experience";
 import { PortfolioInterface } from "./components/PortfolioInterface";
+import { PortfolioAvatar } from "./components/PortfolioAvatar";
+import { PortfolioExperience } from "./components/PortfolioExperience";
 
 function App() {
   return (
@@ -12,12 +14,12 @@ function App() {
       <fog attach="fog" args={["#000000", 10, 50]} />
       <OrbitControls />
       <ambientLight intensity={2} />
-      {/* <Experience />
-      <Avatar />
-      <MacBookPro /> */}
-      <Scroll html>
+      {/* <Experience /> */}
+      <PortfolioExperience />
+      {/* <MacBookPro /> */}
+      {/* <Scroll html>
         <PortfolioInterface />
-      </Scroll>
+      </Scroll> */}
     </Canvas>
   );
 }

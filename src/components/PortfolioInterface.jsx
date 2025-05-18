@@ -1,27 +1,13 @@
-const Section = (props) => {
-  const { children } = props;
-
-  return <section>{children}</section>;
-};
-
 export const PortfolioInterface = () => {
   return (
-    <>
-      <Section>
-        <h1>Home</h1>
-      </Section>
-      <Section>
-        <h1>Skills</h1>
-      </Section>
-      <Section>
-        <h1>Academic Projects</h1>
-      </Section>
-      <Section>
-        <h1>Personal Projects</h1>
-      </Section>
-      <Section>
-        <h1>Contact</h1>
-      </Section>
-    </>
+    <div className="interface">
+      <div className="sections">
+        <section className="section section--right">HOME</section>
+        <section className="section section--left">SKILLS</section>
+        <section className="section section--center">ACADEMIC PROJECTS</section>
+        <section className="section section--center">PERSONAL PROJECTS</section>
+        <section className="section section--left">CONTACT</section>
+      </div>
+    </div>
   );
 };
