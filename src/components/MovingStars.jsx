@@ -34,8 +34,8 @@ export const MovingStars = ({ nbParticles = 1000 }) => {
   );
 };
 
-const colorStart = new Color("skyblue").multiplyScalar(30);
-const colorEnd = new Color("white").multiplyScalar(30);
+const colorStart = new Color("orange").multiplyScalar(30);
+const colorEnd = new Color("blue").multiplyScalar(30);
 
 const Particle = ({ position, size, lifetime, speed }) => {
   const ref = useRef();
@@ -57,9 +57,9 @@ const Particle = ({ position, size, lifetime, speed }) => {
     ref.current.color.r = lerp(colorStart.r, colorEnd.r, lifetimeProgression);
     ref.current.color.g = lerp(colorStart.g, colorEnd.g, lifetimeProgression);
     ref.current.color.b = lerp(colorStart.b, colorEnd.b, lifetimeProgression);
-    ref.current.position.y -= speed * delta;
-    ref.current.position.x += Math.sin(age.current * speed) * delta;
-    ref.current.position.z += Math.cos(age.current * speed) * delta;
+    ref.current.position.y += speed * delta;
+    ref.current.position.x -= Math.sin(age.current * speed) * delta;
+    ref.current.position.z -= Math.cos(age.current * speed) * delta;
 
     if (age.current > lifetime) {
       ref.current.position.set(position[0], position[1], position[2]);

@@ -19,7 +19,7 @@ export const StartingScreen = () => {
     <>
       <Box />
       <StaticStars nbParticles={1000} />
-      <MovingStars nbParticles={800} />
+      {/* <MovingStars nbParticles={800} /> */}
       <OrbitControls
         minDistance={3}
         maxDistance={12}
@@ -27,16 +27,16 @@ export const StartingScreen = () => {
         maxPolarAngle={Math.PI / 2}
       />
 
-      <Environment preset="night" />
+      {/* <Environment preset="night" /> */}
       <pointLight
         ref={light}
         position={[0, 1, 0.5]}
-        intensity={2.5}
+        intensity={1.5}
         decay={1}
       />
 
       <EffectComposer>
-        <Bloom mipmapBlur intensity={1.2} luminanceThreshold={1} />
+        <Bloom mipmapBlur intensity={0.6} luminanceThreshold={1} />
       </EffectComposer>
     </>
   );

@@ -9,9 +9,9 @@ export const StaticStars = ({ nbParticles = 1000 }) => {
   const particles = useMemo(
     () =>
       Array.from({ length: nbParticles }, (_, idx) => ({
-        position: [randFloat(5, 15), randFloatSpread(20), 0],
+        position: [randFloat(40, 80), randFloatSpread(50), 4],
         rotation: [0, randFloat(0, Math.PI * 2), 0],
-        size: randFloat(0.01, 0.2),
+        size: randFloat(0.2, 3),
         lifetime: randFloat(1, 6),
       })),
     []
@@ -33,8 +33,8 @@ export const StaticStars = ({ nbParticles = 1000 }) => {
   );
 };
 
-const colorStart = new Color("pink").multiplyScalar(30);
-const colorEnd = new Color("white").multiplyScalar(30);
+const colorStart = new Color("orange").multiplyScalar(30);
+const colorEnd = new Color("blue").multiplyScalar(30);
 
 const Particle = ({ position, size, rotation, lifetime }) => {
   const ref = useRef();

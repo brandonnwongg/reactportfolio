@@ -9,13 +9,12 @@ import { PortfolioExperience } from "./components/PortfolioExperience";
 
 function App() {
   return (
-    <Canvas camera={{ position: [0, 2, 5], fov: 60 }}>
+    <Canvas camera={{ position: [0, 1, 5], fov: 60 }}>
       <color attach="background" args={["#000000"]} />
-      {/* <fog attach="fog" args={["#000000", 10, 50]} /> */}
-      <ambientLight />
+      <fog attach="fog" args={["#000000", 20, 60]} />
       <OrbitControls />
-      <ambientLight intensity={2} />
-      {/* <Experience /> */}
+      <ambientLight intensity={5} />
+      <Experience />
       <PortfolioExperience />
       {/* <MacBookPro /> */}
       {/* <Scroll html>
