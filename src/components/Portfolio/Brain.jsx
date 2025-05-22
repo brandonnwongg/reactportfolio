@@ -230,7 +230,7 @@ export const Brain = () => {
   });
   return (
     <>
-      <group ref={brainGroup} position={[0, 2, 0]} scale={5}>
+      <group ref={brainGroup} position={[0, 1.5, 2]} scale={1}>
         <Float floatIntensity={0.2} speed={2}>
           <Tubes allthecurve={brainCurves} />
           <BrainParticles allthecurve={brainCurves} />

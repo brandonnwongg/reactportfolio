@@ -1,9 +1,12 @@
 import { Grid, OrbitControls } from "@react-three/drei";
 import { PortfolioAvatar } from "./PortfolioAvatar";
 import { useControls } from "leva";
-import { Brain } from "./Portfolio/Brain";
-import { PortfolioScene } from "./Portfolio/PortfolioScene";
-import { Ground } from "./Portfolio/Ground";
+import { Brain } from "./Brain";
+import { PortfolioScene } from "./PortfolioScene";
+import { Ground } from "./Ground";
+import { useRef } from "react";
+import { Environment } from "@react-three/drei";
+import { PortfolioHome } from "./PortfolioHome";
 
 export const PortfolioExperience = () => {
   const { animation } = useControls({
@@ -13,8 +16,11 @@ export const PortfolioExperience = () => {
     },
   });
 
+  const sceneContainer = useRef();
+
   return (
     <>
+      <Environment preset="sunset" />
       <OrbitControls />
       <Ground position={[0, -0.8, 0]} />
       <Grid
@@ -29,11 +35,12 @@ export const PortfolioExperience = () => {
         fadeStrength={5}
       />
       <PortfolioScene rotation={[0, Math.PI, 0]} />
-      <axesHelper />
+      {/* <axesHelper /> */}
       <group>
         <PortfolioAvatar animation={animation} />
       </group>
-      <Brain />
+      {/* <Brain />
+      <PortfolioHome /> */}
     </>
   );
 };

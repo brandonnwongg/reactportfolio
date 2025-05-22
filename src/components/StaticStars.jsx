@@ -11,8 +11,8 @@ export const StaticStars = ({ nbParticles = 1000 }) => {
       Array.from({ length: nbParticles }, (_, idx) => ({
         position: [randFloat(40, 80), randFloatSpread(50), 4],
         rotation: [0, randFloat(0, Math.PI * 2), 0],
-        size: randFloat(0.2, 3),
-        lifetime: randFloat(1, 6),
+        size: randFloat(1, 3),
+        lifetime: randFloat(3, 6),
       })),
     []
   );

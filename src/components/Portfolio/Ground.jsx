@@ -4,12 +4,12 @@ import { MeshReflectorMaterial } from "@react-three/drei";
 export const Ground = () => {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]}>
-      <planeGeometry args={[50, 50]} />
+      <planeGeometry args={[70, 70]} />
       <MeshReflectorMaterial
-        blur={[300, 100]}
+        blur={[100, 100]}
         resolution={2048}
         mixBlur={1}
-        mixStrength={120}
+        mixStrength={250}
         roughness={1}
         depthScale={2}
         minDepthThreshold={0.4}

@@ -17,7 +17,7 @@ export const StartingScreen = () => {
 
   return (
     <>
-      <Box />
+      {/* <Box /> */}
       <StaticStars nbParticles={1000} />
       {/* <MovingStars nbParticles={800} /> */}
       <OrbitControls
@@ -36,7 +36,7 @@ export const StartingScreen = () => {
       />
 
       <EffectComposer>
-        <Bloom mipmapBlur intensity={0.6} luminanceThreshold={1} />
+        <Bloom mipmapBlur intensity={0.4} luminanceThreshold={1} />
       </EffectComposer>
     </>
   );
