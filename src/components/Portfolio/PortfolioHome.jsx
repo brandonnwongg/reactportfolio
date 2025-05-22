@@ -20,11 +20,12 @@ export function PortfolioHome(props) {
     return () => clearTimeout(timer);
   }, []);
 
-  // useFrame(() => {
-  //   if (groupRef.current) {
-  //     groupRef.current.rotation.x += 0.002;
-  //   }
-  // });
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    if (groupRef.current) {
+      groupRef.current.position.x = Math.sin(t * 2) * 0.05;
+    }
+  });
 
   return (
     <group {...props} ref={groupRef} dispose={null}>
@@ -40,10 +41,10 @@ export function PortfolioHome(props) {
         <mesh
           name="Roof"
           geometry={nodes.Roof.geometry}
-          material={materials["Material.001"]}
+          material={materials["Material.013"]}
           position={[-2.043, 2.856, -5.221]}
           rotation={[0, -1.042, 0]}
-          scale={[0.614, 0.785, 1.201]}
+          scale={[0.638, 0.785, 1.201]}
         />
         <mesh
           name="Windows"
@@ -64,27 +65,28 @@ export function PortfolioHome(props) {
         <mesh
           name="Door"
           geometry={nodes.Door.geometry}
-          material={materials["Material.004"]}
-          position={[-1.999, 1.023, -2.779]}
+          material={materials["Material.011"]}
+          position={[-1.999, 0.942, -2.779]}
           rotation={[-Math.PI, 1.042, -Math.PI]}
-          scale={[0.023, 0.637, 0.393]}
+          scale={[0.015, 0.74, 0.393]}
         />
-        <mesh
+        <group
           name="Plane"
-          geometry={nodes.Plane.geometry}
-          material={materials["Material.005"]}
           position={[-2.749, 0.184, -4.181]}
           rotation={[-Math.PI, 1.042, -Math.PI]}
           scale={[3.797, 11.035, 2.844]}
-        />
-        <mesh
-          name="Platform"
-          geometry={nodes.Platform.geometry}
-          material={materials["Material.006"]}
-          position={[-1.755, 0.247, -2.396]}
-          rotation={[-Math.PI, 1.042, -Math.PI]}
-          scale={[0.386, 0.132, 0.453]}
-        />
+        >
+          <mesh
+            name="Plane003"
+            geometry={nodes.Plane003.geometry}
+            material={materials["Material.005"]}
+          />
+          <mesh
+            name="Plane003_1"
+            geometry={nodes.Plane003_1.geometry}
+            material={materials["Material.007"]}
+          />
+        </group>
       </Float>
     </group>
   );

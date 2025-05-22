@@ -1,27 +1,45 @@
-import { Grid, OrbitControls } from "@react-three/drei";
+import { Grid, useScroll } from "@react-three/drei";
 import { PortfolioAvatar } from "./PortfolioAvatar";
 import { useControls } from "leva";
 import { Brain } from "./Brain";
 import { PortfolioScene } from "./PortfolioScene";
 import { Ground } from "./Ground";
-import { useRef } from "react";
 import { Environment } from "@react-three/drei";
 import { PortfolioHome } from "./PortfolioHome";
+import { SectionTitle } from "./SectionTitle";
+import { useFrame } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
+import { config } from "../../config";
+
+const SECTIONS_DISTANCE = 8;
 
 export const PortfolioExperience = () => {
-  const { animation } = useControls({
-    animation: {
-      value: "Entering Fall",
-      options: ["Entering Fall", "Standing", "Neutral", "Fall", "Waving"],
-    },
-  });
+  // const { animation } = useControls({
+  //   animation: {
+  //     value: "Neutral",
+  //     options: [
+  //       "Entering Fall",
+  //       "Standing",
+  //       "Neutral",
+  //       "Fall",
+  //       "Waving",
+  //       "Walking",
+  //     ],
+  //   },
+  // });
 
+  const [section, setSection] = useState(config.sections[0]);
   const sceneContainer = useRef();
+  const scrollData = useScroll();
+
+  useFrame(() => {
+    sceneContainer.current.position.z =
+      -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+  });
 
   return (
     <>
       <Environment preset="sunset" />
-      <OrbitControls />
       <Ground position={[0, -0.8, 0]} />
       <Grid
         position={[0, 0.1, 0]}
@@ -31,13 +49,39 @@ export const PortfolioExperience = () => {
         cellSize={1}
         cellThickness={0.6}
         infiniteGrid
-        fadeDistance={50}
-        fadeStrength={5}
+        fadeDistance={100}
+        fadeStrength={15}
       />
-      <PortfolioScene rotation={[0, Math.PI, 0]} />
+      <PortfolioScene position={[0, 0, 15]} rotation={[0, Math.PI, 0]} />
       {/* <axesHelper /> */}
-      <group>
+      {/* <group>
         <PortfolioAvatar animation={animation} />
+      </group> */}
+      <PortfolioAvatar />
+      <group ref={sceneContainer}>
+        {/* HOME */}
+        <group>
+          <PortfolioHome />
+          <SectionTitle>HOME</SectionTitle>
+        </group>
+        {/* SKILLS */}
+        <group position-z={SECTIONS_DISTANCE}>
+          <SectionTitle>SKILLS</SectionTitle>
+        </group>
+        {/* ACADMEIC PROJECTS */}
+        <group scale={0.5} position-z={2 * SECTIONS_DISTANCE}>
+          <SectionTitle position-y={0.8}>ACADEMIC</SectionTitle>
+          <SectionTitle>PROJECTS</SectionTitle>
+        </group>
+        {/* PERSONAL PROJECTS */}
+        <group scale={0.5} position-z={3 * SECTIONS_DISTANCE}>
+          <SectionTitle position-y={0.8}>PERSONAL</SectionTitle>
+          <SectionTitle>PROJECTS</SectionTitle>
+        </group>
+        {/* CONTACT */}
+        <group scale={0.8} position-z={4 * SECTIONS_DISTANCE}>
+          <SectionTitle>CONTACTS</SectionTitle>
+        </group>
       </group>
       {/* <Brain />
       <PortfolioHome /> */}

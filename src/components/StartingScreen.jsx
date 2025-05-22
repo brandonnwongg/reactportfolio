@@ -8,35 +8,28 @@ import { Box } from "./Box";
 // "Low Poly Winter Scene" (https://skfb.ly/6R6MM) by EdwiixGG is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
 export const StartingScreen = () => {
-  const light = useRef();
+  // const light = useRef();
 
-  useFrame(({ clock }) => {
-    const time = clock.getElapsedTime();
-    light.current.position.x = Math.sin(time * 0.8) * 1.5;
-  });
+  // useFrame(({ clock }) => {
+  //   const time = clock.getElapsedTime();
+  //   light.current.position.x = Math.sin(time * 0.8) * 1.5;
+  // });
 
   return (
     <>
-      {/* <Box /> */}
+      <Box />
       <StaticStars nbParticles={1000} />
       {/* <MovingStars nbParticles={800} /> */}
-      <OrbitControls
-        minDistance={3}
-        maxDistance={12}
-        enablePan={false}
-        maxPolarAngle={Math.PI / 2}
-      />
-
       {/* <Environment preset="night" /> */}
-      <pointLight
+      {/* <pointLight
         ref={light}
         position={[0, 1, 0.5]}
         intensity={1.5}
         decay={1}
-      />
+      /> */}
 
       <EffectComposer>
-        <Bloom mipmapBlur intensity={0.4} luminanceThreshold={1} />
+        <Bloom mipmapBlur intensity={0.1} luminanceThreshold={1} />
       </EffectComposer>
     </>
   );

@@ -18,7 +18,7 @@ export const Box = () => {
   return (
     <mesh ref={ref} position={[position.x, position.y, position.z]}>
       <boxGeometry />
-      <meshBasicMaterial color="orange" transparent opacity={0} />
+      <meshBasicMaterial color="orange" transparent opacity={0.5} />
     </mesh>
   );
 };
