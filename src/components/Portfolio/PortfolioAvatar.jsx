@@ -10,16 +10,13 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 export function PortfolioAvatar(props) {
-  // const { animation } = props;
-
   const { nodes, materials } = useGLTF("/models/PortfolioAvatar.glb");
 
   const { animations: enteringFallAnimation } = useFBX(
     "/animations/enteringfall.fbx"
   );
   const { animations: standingAnimation } = useFBX("/animations/stand.fbx");
-  const { animations: neutralAnimation } = useFBX("/animations/neutral.fbx");
-  // const { animations: fallingAnimation } = useFBX("/animations/fall.fbx");
+  const { animations: neutralAnimation } = useFBX("/animations/idle.fbx");
   const { animations: wavingAnimation } = useFBX("/animations/wave.fbx");
   const { animations: walkingAnimation } = useFBX("/animations/walking.fbx");
 
@@ -27,7 +24,6 @@ export function PortfolioAvatar(props) {
   enteringFallAnimation[0].name = "Entering Fall";
   standingAnimation[0].name = "Standing";
   neutralAnimation[0].name = "Neutral";
-  // fallingAnimation[0].name = "Fall";
   wavingAnimation[0].name = "Waving";
   walkingAnimation[0].name = "Walking";
 
@@ -36,15 +32,16 @@ export function PortfolioAvatar(props) {
       enteringFallAnimation[0],
       standingAnimation[0],
       neutralAnimation[0],
-      // fallingAnimation[0],
       wavingAnimation[0],
       walkingAnimation[0],
     ],
     group
   );
-
+  //from here
   const [ready, setReady] = useState(false);
+  const [startupComplete, setStartupComplete] = useState(false);
   const [currentStage, setCurrentStage] = useState(null); // Start with null
+
   const currentAction = useRef(null);
   const hasTransitioned = useRef(false);
   const currentIndex = useRef(0);
@@ -99,92 +96,69 @@ export function PortfolioAvatar(props) {
       if (currentIndex.current < sequence.current.length) {
         const next = sequence.current[currentIndex.current++];
         setCurrentStage(next);
+      } else {
+        setStartupComplete(true);
       }
     }
   });
 
-  // const stopAllAnimations = () => {
-  //   Object.values(actions).forEach((action) => {
-  //     if (action.isRunning()) {
-  //       action.stop();
-  //     }
-  //   });
-  // };
+  const [animation, setAnimation] = useState("Neutral"); // Default idle pose
+  const [isHovering, setIsHovering] = useState(false);
 
-  // const [animation, setAnimation] = useState("Neutral"); // Default idle pose
+  useEffect(() => {
+    const active = startupComplete ? animation : currentStage;
+    if (!actions || !actions[active]) return;
 
-  // useEffect(() => {
-  //   if (!actions || !actions[animation]) return;
+    actions[active].reset().play();
 
-  //   actions[animation].reset().fadeIn(0.5).play();
+    return () => {
+      if (actions[active]) {
+        actions[active].reset().stop();
+      }
+    };
+  }, [animation, currentStage, actions, startupComplete]);
 
-  //   return () => {
-  //     if (actions[animation]) {
-  //       actions[animation].reset().fadeOut(0.5).stop();
-  //     }
-  //   };
-  // }, [animation, actions]);
+  const scrollData = useScroll();
+  const lastScroll = useRef(0);
 
-  // const scrollData = useScroll();
-  // const lastScroll = useRef(0);
+  useFrame(() => {
+    const scrollDelta = scrollData.offset - lastScroll.current;
 
-  // useFrame(() => {
-  //   const scrollDelta = scrollData.offset - lastScroll.current;
-  //   let rotationTarget = 0;
-  //   if (Math.abs(scrollDelta) > 0.0001) {
-  //     stopAllAnimations();
-  //     if (scrollDelta > 0) {
-  //       rotationTarget = 0;
-  //     } else {
-  //       rotationTarget = Math.PI;
-  //     }
-  //   } else {
-  //     setAnimation("Waving");
-  //   }
-  //   group.current.rotation.y = THREE.MathUtils.lerp(
-  //     group.current.rotation.y,
-  //     rotationTarget,
-  //     0.1
-  //   );
-  //   lastScroll.current = scrollData.offset;
-  // });
-  // useFrame(() => {
-  //   const scrollDelta = scrollData.offset - lastScroll.current;
+    if (!startupComplete && Math.abs(scrollDelta) > 0.0001) {
+      setStartupComplete(true);
+      setCurrentStage(null);
+      setAnimation("Walking");
+      currentAction.current?.stop();
+      return;
+    }
 
-  //   if (Math.abs(scrollDelta) > 0.0001) {
-  //     stopAllAnimations(); // Immediately stop ongoing animation
-  //     setAnimation("Walking");
+    if (startupComplete) {
+      if (Math.abs(scrollDelta) > 0.0001) {
+        setAnimation("Walking");
 
-  //     group.current.rotation.y = THREE.MathUtils.lerp(
-  //       group.current.rotation.y,
-  //       scrollDelta > 0 ? 0 : Math.PI,
-  //       0.1
-  //     );
-  //   } else {
-  //     setAnimation("Neutral");
-  //   }
-
-  //   lastScroll.current = scrollData.offset;
-  // });
-
-  // useEffect(() => {
-  //   if (!actions || !animation || !actions[animation]) return;
-
-  //   const action = actions[animation];
-  //   action.reset().fadeIn(0.2).play();
-
-  //   return () => {
-  //     action.fadeOut(0.2).stop();
-  //   };
-  // }, [animation, actions]);
+        group.current.rotation.y = THREE.MathUtils.lerp(
+          group.current.rotation.y,
+          scrollDelta > 0 ? 0 : Math.PI,
+          0.1
+        );
+      } else {
+        if (isHovering) {
+          setAnimation("Waving");
+        } else {
+          setAnimation("Neutral");
+        }
+      }
+      lastScroll.current = scrollData.offset;
+    }
+  });
 
   return (
     <group
       {...props}
       dispose={null}
       ref={group}
-      onPointerEnter={() => setAnimation("Waving")}
-      onPointerLeave={() => setAnimation("Neutral")}
+      onPointerEnter={() => setIsHovering(true)}
+      onPointerLeave={() => setIsHovering(false)}
     >
       <primitive object={nodes.Hips} />
       <skinnedMesh
