@@ -14,78 +14,178 @@ export function PortfolioAvatar(props) {
 
   const { nodes, materials } = useGLTF("/models/PortfolioAvatar.glb");
 
-  // const { animations: enteringFallAnimation } = useFBX(
-  //   "/animations/enteringfall.fbx"
-  // );
-  // const { animations: standingAnimation } = useFBX("/animations/stand.fbx");
+  const { animations: enteringFallAnimation } = useFBX(
+    "/animations/enteringfall.fbx"
+  );
+  const { animations: standingAnimation } = useFBX("/animations/stand.fbx");
   const { animations: neutralAnimation } = useFBX("/animations/neutral.fbx");
   // const { animations: fallingAnimation } = useFBX("/animations/fall.fbx");
-  // const { animations: wavingAnimation } = useFBX("/animations/wave.fbx");
+  const { animations: wavingAnimation } = useFBX("/animations/wave.fbx");
   const { animations: walkingAnimation } = useFBX("/animations/walking.fbx");
 
   const group = useRef();
-  // enteringFallAnimation[0].name = "Entering Fall";
-  // standingAnimation[0].name = "Standing";
+  enteringFallAnimation[0].name = "Entering Fall";
+  standingAnimation[0].name = "Standing";
   neutralAnimation[0].name = "Neutral";
   // fallingAnimation[0].name = "Fall";
-  // wavingAnimation[0].name = "Waving";
+  wavingAnimation[0].name = "Waving";
   walkingAnimation[0].name = "Walking";
 
   const { actions } = useAnimations(
     [
-      // enteringFallAnimation[0],
-      // standingAnimation[0],
+      enteringFallAnimation[0],
+      standingAnimation[0],
       neutralAnimation[0],
       // fallingAnimation[0],
-      // wavingAnimation[0],
+      wavingAnimation[0],
       walkingAnimation[0],
     ],
     group
   );
 
-  const [animation, setAnimation] = useState("Walking");
-  // useEffect(() => {
-  //   actions[animation].reset().fadeIn(0.5).play();
-  //   return () => actions[animation].fadeOut(0.5);
-  // }, [animation]);
-  useEffect(() => {
-    if (!actions || !actions[animation]) return;
+  const [ready, setReady] = useState(false);
+  const [currentStage, setCurrentStage] = useState(null); // Start with null
+  const currentAction = useRef(null);
+  const hasTransitioned = useRef(false);
+  const currentIndex = useRef(0);
+  const sequence = useRef(["Standing", "Neutral"]);
 
-    actions[animation].reset().fadeIn(0.5).play();
+  // Wait until all needed animations are loaded
+  useEffect(() => {
+    if (actions["Entering Fall"] && actions["Standing"] && actions["Neutral"]) {
+      setReady(true);
+    }
+  }, [actions]);
+
+  // When ready, begin the sequence
+  useEffect(() => {
+    if (ready) {
+      setCurrentStage("Entering Fall");
+    }
+  }, [ready]);
+
+  // Play currentStage when it’s set
+  useEffect(() => {
+    if (!currentStage || !actions[currentStage]) return;
+
+    const action = actions[currentStage];
+    currentAction.current = action;
+    hasTransitioned.current = false;
+
+    action.reset().play();
+
+    if (currentStage !== "Neutral") {
+      action.setLoop(THREE.LoopOnce, 1);
+      action.clampWhenFinished = true;
+    }
+
+    if (currentStage === "Standing") {
+      action.setEffectiveTimeScale(3.5);
+    }
 
     return () => {
-      if (actions[animation]) {
-        actions[animation].reset().fadeOut(0.5).stop();
-      }
+      action.stop();
     };
-  }, [animation, actions]);
+  }, [currentStage, actions]);
 
-  const scrollData = useScroll();
-  const lastScroll = useRef(0);
-
+  // Detect when current animation finishes and move to next
   useFrame(() => {
-    const scrollDelta = scrollData.offset - lastScroll.current;
-    let rotationTarget = 0;
-    if (Math.abs(scrollDelta) > 0.0001) {
-      setAnimation("Walking");
-      if (scrollDelta > 0) {
-        rotationTarget = 0;
-      } else {
-        rotationTarget = Math.PI;
+    const action = currentAction.current;
+    if (!action || hasTransitioned.current || !action.isRunning()) return;
+
+    if (action.time >= action._clip.duration - 0.1) {
+      hasTransitioned.current = true;
+
+      if (currentIndex.current < sequence.current.length) {
+        const next = sequence.current[currentIndex.current++];
+        setCurrentStage(next);
       }
-    } else {
-      setAnimation("Neutral");
     }
-    group.current.rotation.y = THREE.MathUtils.lerp(
-      group.current.rotation.y,
-      rotationTarget,
-      0.1
-    );
-    lastScroll.current = scrollData.offset;
   });
 
+  // const stopAllAnimations = () => {
+  //   Object.values(actions).forEach((action) => {
+  //     if (action.isRunning()) {
+  //       action.stop();
+  //     }
+  //   });
+  // };
+
+  // const [animation, setAnimation] = useState("Neutral"); // Default idle pose
+
+  // useEffect(() => {
+  //   if (!actions || !actions[animation]) return;
+
+  //   actions[animation].reset().fadeIn(0.5).play();
+
+  //   return () => {
+  //     if (actions[animation]) {
+  //       actions[animation].reset().fadeOut(0.5).stop();
+  //     }
+  //   };
+  // }, [animation, actions]);
+
+  // const scrollData = useScroll();
+  // const lastScroll = useRef(0);
+
+  // useFrame(() => {
+  //   const scrollDelta = scrollData.offset - lastScroll.current;
+  //   let rotationTarget = 0;
+  //   if (Math.abs(scrollDelta) > 0.0001) {
+  //     stopAllAnimations();
+  //     if (scrollDelta > 0) {
+  //       rotationTarget = 0;
+  //     } else {
+  //       rotationTarget = Math.PI;
+  //     }
+  //   } else {
+  //     setAnimation("Waving");
+  //   }
+  //   group.current.rotation.y = THREE.MathUtils.lerp(
+  //     group.current.rotation.y,
+  //     rotationTarget,
+  //     0.1
+  //   );
+  //   lastScroll.current = scrollData.offset;
+  // });
+  // useFrame(() => {
+  //   const scrollDelta = scrollData.offset - lastScroll.current;
+
+  //   if (Math.abs(scrollDelta) > 0.0001) {
+  //     stopAllAnimations(); // Immediately stop ongoing animation
+  //     setAnimation("Walking");
+
+  //     group.current.rotation.y = THREE.MathUtils.lerp(
+  //       group.current.rotation.y,
+  //       scrollDelta > 0 ? 0 : Math.PI,
+  //       0.1
+  //     );
+  //   } else {
+  //     setAnimation("Neutral");
+  //   }
+
+  //   lastScroll.current = scrollData.offset;
+  // });
+
+  // useEffect(() => {
+  //   if (!actions || !animation || !actions[animation]) return;
+
+  //   const action = actions[animation];
+  //   action.reset().fadeIn(0.2).play();
+
+  //   return () => {
+  //     action.fadeOut(0.2).stop();
+  //   };
+  // }, [animation, actions]);
+
   return (
-    <group {...props} dispose={null} ref={group}>
+    <group
+      {...props}
+      dispose={null}
+      ref={group}
+      onPointerEnter={() => setAnimation("Waving")}
+      onPointerLeave={() => setAnimation("Neutral")}
+    >
       <primitive object={nodes.Hips} />
       <skinnedMesh
         geometry={nodes.Wolf3D_Glasses.geometry}
@@ -149,5 +249,8 @@ export function PortfolioAvatar(props) {
 }
 
 useGLTF.preload("/models/PortfolioAvatar.glb");
+useFBX.preload("/animations/enteringfall.fbx");
+useFBX.preload("/animations/stand.fbx");
 useFBX.preload("/animations/neutral.fbx");
 useFBX.preload("/animations/walking.fbx");
+useFBX.preload("/animations/wave.fbx");

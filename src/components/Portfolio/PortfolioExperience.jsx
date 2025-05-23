@@ -1,4 +1,4 @@
-import { Grid, useScroll } from "@react-three/drei";
+import { Grid, OrbitControls, useScroll } from "@react-three/drei";
 import { PortfolioAvatar } from "./PortfolioAvatar";
 import { useControls } from "leva";
 import { Brain } from "./Brain";
@@ -40,25 +40,32 @@ export const PortfolioExperience = () => {
   return (
     <>
       <Environment preset="sunset" />
-      <Ground position={[0, -0.8, 0]} />
-      <Grid
-        position={[0, 0.1, 0]}
-        sectionSize={1.5}
-        sectionColor={"#9D00FF"}
-        sectionThickness={5}
-        cellSize={1}
-        cellThickness={0.6}
-        infiniteGrid
-        fadeDistance={100}
-        fadeStrength={15}
-      />
-      <PortfolioScene position={[0, 0, 15]} rotation={[0, Math.PI, 0]} />
       {/* <axesHelper /> */}
-      {/* <group>
-        <PortfolioAvatar animation={animation} />
-      </group> */}
       <PortfolioAvatar />
       <group ref={sceneContainer}>
+        <OrbitControls
+          enableZoom={false}
+          enablePan={false}
+          minPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
+          minAzimuthAngle={-0.5}
+          maxAzimuthAngle={0.5}
+          rotateSpeed={0.5}
+        />
+
+        <Ground position={[0, -0.8, 0]} />
+        <Grid
+          position={[0, 0.1, 0]}
+          sectionSize={1.5}
+          sectionColor={"#9D00FF"}
+          sectionThickness={5}
+          cellSize={1}
+          cellThickness={0.6}
+          infiniteGrid
+          fadeDistance={100}
+          fadeStrength={15}
+        />
+        <PortfolioScene position={[0, 0, 15]} rotation={[0, Math.PI, 0]} />
         {/* HOME */}
         <group>
           <PortfolioHome />
@@ -66,6 +73,7 @@ export const PortfolioExperience = () => {
         </group>
         {/* SKILLS */}
         <group position-z={SECTIONS_DISTANCE}>
+          <Brain />
           <SectionTitle>SKILLS</SectionTitle>
         </group>
         {/* ACADMEIC PROJECTS */}
@@ -83,8 +91,6 @@ export const PortfolioExperience = () => {
           <SectionTitle>CONTACTS</SectionTitle>
         </group>
       </group>
-      {/* <Brain />
-      <PortfolioHome /> */}
     </>
   );
 };

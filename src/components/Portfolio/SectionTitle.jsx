@@ -2,7 +2,7 @@ import { Text3D } from "@react-three/drei";
 
 export const SectionTitle = ({ children, ...props }) => {
   return (
-    <group position={[-2.5, 0, 0.5]}>
+    <group position={[-2.5, 0.5, 0.5]}>
       <group>
         <Text3D
           font={"fonts/Anton_Regular.json"}
