@@ -6,10 +6,17 @@ Command: npx gltfjsx@6.5.3 public/models/portfoliohome.glb -o src/components/Por
 import React, { useRef } from "react";
 
 import { useGLTF, Float } from "@react-three/drei";
+import { motion } from "framer-motion-3d";
 
 export function PortfolioHome(props) {
   const groupRef = useRef();
   const { nodes, materials } = useGLTF("/models/portfoliohome.glb");
+
+  const transition = {
+    delay: 0.2,
+    duration: 3,
+    ease: [0.25, 1, 0.5, 1],
+  };
 
   return (
     <group {...props} ref={groupRef} dispose={null}>
@@ -27,55 +34,95 @@ export function PortfolioHome(props) {
           rotation={[-Math.PI, 1.042, -Math.PI]}
           scale={[2.145, 1.153, 1.764]}
         />
-        <mesh
-          name="Roof"
-          geometry={nodes.Roof.geometry}
-          material={materials["Material.013"]}
-          position={[-2.043, 2.856, -5.221]}
-          rotation={[0, -1.042, 0]}
-          scale={[0.638, 0.785, 1.201]}
-        />
-        <mesh
-          name="Windows"
-          geometry={nodes.Windows.geometry}
-          material={materials["Material.003"]}
-          position={[-2.817, 1.654, -2.28]}
-          rotation={[0, -1.042, -Math.PI / 2]}
-          scale={[-0.491, -0.367, -0.367]}
-        />
-        <mesh
-          name="WindowsR"
-          geometry={nodes.WindowsR.geometry}
-          material={materials["Material.003"]}
-          position={[-4.688, 1.608, -3.836]}
-          rotation={[0, 0.529, -Math.PI / 2]}
-          scale={[-0.491, -0.367, -0.367]}
-        />
-        <mesh
-          name="Door"
-          geometry={nodes.Door.geometry}
-          material={materials["Material.011"]}
-          position={[-1.999, 0.942, -2.779]}
-          rotation={[-Math.PI, 1.042, -Math.PI]}
-          scale={[0.015, 0.74, 0.393]}
-        />
-        <group
-          name="Plane"
-          position={[-2.749, 0.184, -4.181]}
-          rotation={[-Math.PI, 1.042, -Math.PI]}
-          scale={[3.797, 11.035, 2.844]}
+        <motion.mesh
+          position-y={50}
+          transition={transition}
+          variants={{
+            Home: {
+              y: 0,
+            },
+          }}
         >
           <mesh
-            name="Plane003"
-            geometry={nodes.Plane003.geometry}
-            material={materials["Material.005"]}
+            name="Roof"
+            geometry={nodes.Roof.geometry}
+            material={materials["Material.013"]}
+            position={[-2.043, 2.856, -5.221]}
+            rotation={[0, -1.042, 0]}
+            scale={[0.638, 0.785, 1.201]}
+          />
+        </motion.mesh>
+        <motion.group
+          position-x={10}
+          transition={transition}
+          variants={{
+            Home: {
+              x: 0,
+            },
+          }}
+        >
+          <mesh
+            name="Windows"
+            geometry={nodes.Windows.geometry}
+            material={materials["Material.003"]}
+            position={[-2.817, 1.654, -2.28]}
+            rotation={[0, -1.042, -Math.PI / 2]}
+            scale={[-0.491, -0.367, -0.367]}
           />
           <mesh
-            name="Plane003_1"
-            geometry={nodes.Plane003_1.geometry}
-            material={materials["Material.007"]}
+            name="Door"
+            geometry={nodes.Door.geometry}
+            material={materials["Material.011"]}
+            position={[-1.999, 0.942, -2.779]}
+            rotation={[-Math.PI, 1.042, -Math.PI]}
+            scale={[0.015, 0.74, 0.393]}
           />
-        </group>
+        </motion.group>
+        <motion.group
+          position-x={-10}
+          transition={transition}
+          variants={{
+            Home: {
+              x: 0,
+            },
+          }}
+        >
+          <mesh
+            name="WindowsR"
+            geometry={nodes.WindowsR.geometry}
+            material={materials["Material.003"]}
+            position={[-4.688, 1.608, -3.836]}
+            rotation={[0, 0.529, -Math.PI / 2]}
+            scale={[-0.491, -0.367, -0.367]}
+          />
+        </motion.group>
+        <motion.group
+          position-y={-10}
+          transition={transition}
+          variants={{
+            Home: {
+              y: 0,
+            },
+          }}
+        >
+          <group
+            name="Plane"
+            position={[-2.749, 0.184, -4.181]}
+            rotation={[-Math.PI, 1.042, -Math.PI]}
+            scale={[3.797, 11.035, 2.844]}
+          >
+            <mesh
+              name="Plane003"
+              geometry={nodes.Plane003.geometry}
+              material={materials["Material.005"]}
+            />
+            <mesh
+              name="Plane003_1"
+              geometry={nodes.Plane003_1.geometry}
+              material={materials["Material.007"]}
+            />
+          </group>
+        </motion.group>
       </Float>
     </group>
   );

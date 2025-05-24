@@ -73,23 +73,8 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <motion.group
-            position-x={-10}
-            scale={0}
-            transition={{
-              delay: 0.3,
-              duration: 3,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            variants={{
-              Home: {
-                x: 0,
-                scale: 1,
-              },
-            }}
-          >
-            <PortfolioHome />
-          </motion.group>
+          <PortfolioHome />
+
           <SectionTitle>HOME</SectionTitle>
         </motion.group>
         {/* SKILLS */}
