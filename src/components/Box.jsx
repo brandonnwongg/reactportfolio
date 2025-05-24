@@ -1,5 +1,5 @@
 import { useHelper } from "@react-three/drei";
-import { useControls } from "leva";
+import { useControls, button } from "leva";
 import { useRef } from "react";
 import * as THREE from "three";
 
@@ -18,7 +18,7 @@ export const Box = () => {
   return (
     <mesh ref={ref} position={[position.x, position.y, position.z]}>
       <boxGeometry />
-      <meshBasicMaterial color="orange" transparent opacity={0.5} />
+      <meshBasicMaterial color="orange" transparent opacity={0} />
     </mesh>
   );
 };

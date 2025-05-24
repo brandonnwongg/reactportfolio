@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { extend, useFrame, useThree } from "@react-three/fiber";
 import { shaderMaterial, Float } from "@react-three/drei";
 import { data } from "./data";
+import { motion } from "framer-motion-3d";
 
 const PATHS = data.economics[0].paths;
 console.log(data.economics[0].paths);
@@ -108,7 +109,7 @@ function Tubes({ allthecurve }) {
 
 // BRAIN PARTICLES FOR THE TUBE
 function BrainParticles({ allthecurve }) {
-  let density = 10;
+  let density = 1;
   let numberOfPoints = allthecurve.length * density;
   const myPoints = useRef([]);
   const brainGeo = useRef();
@@ -230,12 +231,28 @@ export const Brain = () => {
   });
   return (
     <>
-      <group ref={brainGroup} position={[0, 1.5, 2]} scale={1}>
+      <motion.group
+        ref={brainGroup}
+        position={[-1.5, 2, -2]}
+        scale={0.5}
+        position-y={-10.5}
+        transition={{
+          delay: 0.2,
+          duration: 3,
+          ease: [0.25, 1, 0.5, 1],
+        }}
+        variants={{
+          Skills: {
+            y: 2.2,
+            scale: 15,
+          },
+        }}
+      >
         <Float floatIntensity={0.2} speed={2}>
           <Tubes allthecurve={brainCurves} />
           <BrainParticles allthecurve={brainCurves} />
         </Float>
-      </group>
+      </motion.group>
     </>
   );
 };

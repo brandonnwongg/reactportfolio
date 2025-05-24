@@ -7,10 +7,11 @@ import { Ground } from "./Ground";
 import { Environment } from "@react-three/drei";
 import { PortfolioHome } from "./PortfolioHome";
 import { SectionTitle } from "./SectionTitle";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { config } from "../../config";
 import { motion } from "framer-motion-3d";
+import { animate, useMotionValue } from "framer-motion";
 
 const SECTIONS_DISTANCE = 8;
 
@@ -18,12 +19,33 @@ export const PortfolioExperience = () => {
   const [section, setSection] = useState(config.sections[0]);
   const sceneContainer = useRef();
   const scrollData = useScroll();
+  const { camera } = useThree();
 
   const sceneTransition = {
     delay: 0.3,
     duration: 1.5,
     ease: [0.22, 1, 0.36, 1],
   };
+
+  // Motion values for camera
+  const cameraX = useMotionValue(0);
+  const lookAtX = useMotionValue(0);
+  const cameraZ = useMotionValue(5);
+  const cameraY = useMotionValue(0);
+
+  useEffect(() => {
+    if (section === "Skills") {
+      animate(cameraX, -1, { duration: 4, ease: [0.22, 1, 0.36, 1] });
+      animate(cameraZ, 3, { duration: 4, ease: [0.22, 1, 0.36, 1] });
+      animate(cameraY, 1.5, { duration: 4, ease: [0.22, 1, 0.36, 1] }); // 👈 zoom in // 👈 zoom in
+      animate(lookAtX, 2, { duration: 4, ease: [0.22, 1, 0.36, 1] });
+    } else {
+      animate(cameraX, 0, { duration: 4, ease: [0.22, 1, 0.36, 1] });
+      animate(cameraY, 0.5, { duration: 4, ease: [0.22, 1, 0.36, 1] });
+      animate(cameraZ, 5, { duration: 4, ease: [0.22, 1, 0.36, 1] }); // 👈 zoom out
+      animate(lookAtX, 0, { duration: 4, ease: [0.22, 1, 0.36, 1] });
+    }
+  }, [section]);
 
   useFrame(() => {
     sceneContainer.current.position.z =
@@ -32,12 +54,23 @@ export const PortfolioExperience = () => {
     setSection(
       config.sections[Math.round(scrollData.offset * (scrollData.pages - 1))]
     );
+    camera.position.set(cameraX.get(), cameraY.get(), cameraZ.get());
+    camera.lookAt(lookAtX.get(), 0, -2);
   });
+
+  // useControls("Helper", {
+  //   getLookAt: button(() => {
+  //     const position = controls.current.position;
+  //     const target = controls.current.getTarget();
+  //     console.log([ ...position, ...target ]);
+  //   }),
+  // });
 
   return (
     <>
       <Environment preset="sunset" />
       {/* <axesHelper /> */}
+
       <PortfolioAvatar />
       <motion.group ref={sceneContainer} animate={section}>
         <OrbitControls
@@ -80,6 +113,7 @@ export const PortfolioExperience = () => {
         {/* SKILLS */}
         <motion.group
           position-z={SECTIONS_DISTANCE}
+          position-x={1.5}
           position-y={-3.5}
           transition={sceneTransition}
           variants={{
