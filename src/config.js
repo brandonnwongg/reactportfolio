@@ -2,8 +2,8 @@ export const config = {
   sections: [
     "Home",
     "Skills",
-    "Academic Projects",
-    "Personal Projects",
+    "AcademicProjects",
+    "PersonalProjects",
     "Contact",
   ],
 };
