@@ -167,7 +167,7 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <SectionTitle>CONTACTS</SectionTitle>
+          <SectionTitle>CONTACT</SectionTitle>
         </motion.group>
       </motion.group>
     </>

@@ -5,6 +5,8 @@ import { shaderMaterial, Float } from "@react-three/drei";
 import { data } from "./data";
 import { motion } from "framer-motion-3d";
 
+//Tutorial from https://www.youtube.com/watch?v=OCjwL5QbiMg
+
 const PATHS = data.economics[0].paths;
 console.log(data.economics[0].paths);
 

@@ -77,7 +77,7 @@ export function PortfolioAvatar(props) {
     }
 
     if (currentStage === "Standing") {
-      action.setEffectiveTimeScale(3.5);
+      action.setEffectiveTimeScale(4);
     }
 
     return () => {
