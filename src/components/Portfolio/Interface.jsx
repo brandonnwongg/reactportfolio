@@ -3,6 +3,8 @@ import { useFrame } from "@react-three/fiber";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { config } from "../../config";
+import { atom } from "jotai";
+import { useAtom } from "jotai";
 
 const categories = [
   { label: "Programming Languages", key: "programmingLanguages" },
@@ -11,11 +13,15 @@ const categories = [
   { label: "Languages", key: "languages" },
 ];
 
+export const projectAtom = atom(config.AcademicProjects[0]);
+
 export const Interface = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const scrollData = useScroll();
 
-  // console.log("config.Skills:", config.Skills);
+  const [_project, setProject] = useAtom(projectAtom);
+
+  console.log("config.AcademicProjects:", config.AcademicProjects);
 
   useFrame(() => {
     setHasScrolled(scrollData.offset > 0);
@@ -125,8 +131,95 @@ export const Interface = () => {
             ))}
           </motion.div>
         </section>
-        <section className="section section--left">ACADEMIC PROJECTS</section>
-        <section className="section section--right">PERSONAL PROJECTS</section>
+
+        {/* ACADEMIC PROJECTS */}
+        <section className="section section--left">
+          <motion.div
+            className="academics"
+            whileInView={"visible"}
+            initial={{
+              opacity: 0,
+            }}
+            variants={{
+              visible: {
+                opacity: 1,
+              },
+            }}
+          >
+            {config.AcademicProjects.map((project, idx) => (
+              <motion.div
+                onMouseEnter={() => setProject(project)}
+                key={project.title}
+                className="academic-project"
+                initial={{ opacity: 0 }}
+                variants={{
+                  visible: { opacity: 1 },
+                }}
+                transition={{ duration: 1, delay: idx * 0.5 }}
+              >
+                <a href={project.link} target="_blank">
+                  <img
+                    className="academic-project-image"
+                    src={project.image}
+                    alt={project.title}
+                  />
+                  <div className="academic-project-details">
+                    <h3 className="academic-project-title">
+                      -{project.title}-
+                    </h3>
+                    {/* <h4 className="academic-project-module">
+                      Module: <br />
+                      {project.module}
+                    </h4> */}
+                    <p className="academic-project-description">
+                      {project.description}
+                    </p>
+                  </div>
+                </a>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* PERSONAL PROJECTS */}
+        <section className="section section--right">
+          <motion.div
+            className="personal"
+            whileInView={"visible"}
+            initial={{
+              opacity: 0,
+            }}
+            variants={{
+              visible: {
+                opacity: 1,
+              },
+            }}
+          >
+            {config.PersonalProjects.map((project, idx) => (
+              <motion.div
+                key={project.ptitle}
+                className="personal-project"
+                initial={{ opacity: 0 }}
+                variants={{
+                  visible: { opacity: 1 },
+                }}
+                transition={{ duration: 1, delay: idx * 0.5 }}
+              >
+                <a href={project.pref} target="_blank">
+                  <div className="personal-project-details">
+                    <h3 className="personal-project-title">
+                      -{project.ptitle}-
+                    </h3>
+                    <p className="personal-project-description">
+                      {project.pdescription}
+                    </p>
+                    <p className="personal-project-link">{project.plink}</p>
+                  </div>
+                </a>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
         <section className="section section--left">CONTACT</section>
       </div>
     </div>

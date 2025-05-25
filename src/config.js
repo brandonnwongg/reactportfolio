@@ -49,28 +49,97 @@ export const config = {
       { name: "German", level: 80 },
       { name: "Mandarin", level: 30 },
     ],
-
-    AcademicProjects: [
-      {
-      title:"",
-      description:"",
-      link:"https://gitlab.rz.htw-berlin.de/s0583275/movement-based-interfaces",
-    }
-    {
-      title:"",
-      description:"",
-      link:"",
-    }
-    {
-      title:"",
-      description:"",
-      link:"",
-    }
-    {
-      title:"",
-      description:"",
-      link:"",
-    }
-  ]
   },
+
+  AcademicProjects: [
+    {
+      title: "Immersive VR Sketch",
+      image: "images/projektstudium.png",
+      clip: "clips/projektstudium.mp4",
+      module: "Projektstudium",
+      description:
+        "VR multiplayer sketching tool with hand gesture input for immersive 3D drawing and collaboration.",
+      link: "https://gitlab.rz.htw-berlin.de/s0583275/movement-based-interfaces",
+    },
+    {
+      title: "Nosepad",
+      image: "images/nui.png",
+      clip: "clips/nui.mp4",
+      module: "Natural User Interfaces",
+      description:
+        "Hands-Free Drawing Application that uses facial tracking for drawing and voice commands for button execution.",
+      link: "https://github.com/buayanil/NosePad",
+    },
+    {
+      title: "Covid Data Visualizer",
+      image: "images/computergrafik.png",
+      clip: "clips/computergrafik.mp4",
+      module: "Computergrafik",
+      description:
+        "Visualized global COVID-19 data in 3D using Three.js and public APIs for real-time case tracking.",
+      link: "https://github.com/brandonnwongg/CGKurteil",
+    },
+    {
+      title: "Mitosis Identification",
+      image: "images/bildverarbeitung.png",
+      clip: "images/bildverarbeitung.png",
+      module: "Medizinische Bildverarbeitung",
+      description:
+        "Cell mitosis detection algorithm in Jupyter Notebook for medical image analysis using preprocessing and classification",
+      link: "-",
+    },
+    {
+      title: "improveBerlin",
+      image: "images/webentwicklung.png",
+      clip: "images/webentwicklung.png",
+      module: "Webentwicklung",
+      description:
+        "Full-Stack Web Development with MERN for reporting places in Berlin that requires improvement.",
+      link: "https://github.com/brandonnwongg/brandawid-WAD",
+    },
+    {
+      title: "Heal Link",
+      image: "images/sozialer.png",
+      clips: "images/sozialer.png",
+      module: "Entwicklung sozialer Anwendungen",
+      description:
+        "Social Media PLatform where users can share their health journeys.",
+      link: "https://github.com/Abodx9/heal_link",
+    },
+    {
+      title: "HouseTourVR",
+      image: "images/emergingtechnologies.png",
+      clip: "clips/emergingtechnologies.mp4",
+      module: "Emerging Technologies",
+      description:
+        "Multiplayer VR experience enabling users to remotely tour and customize virtual home layouts in real time.",
+      link: "https://github.com/brandonnwongg/housetourVR",
+    },
+    {
+      title: "Mastermind",
+      image: "images/se2.png",
+      clip: "images/se2.png",
+      module: "Software Engineering 2",
+      description:
+        "Mastermind console game with Python, with the focus on TTD and Quality Assurance.",
+      link: "https://gitlab.rz.htw-berlin.de/s0580634/wise24-25_superhirn_22",
+    },
+  ],
+
+  PersonalProjects: [
+    {
+      ptitle: "Portfolio",
+      pdescription:
+        "This portfolio is built with React, three-fiber, and Framer Motion. Some of the Models ive created using Blender and exported to GLTF format for use in the 3D scene, and some are downloaded from Sketchfab. Also, the animations are created using Mixamo and exported to FBX format for use in the 3D scene, and avatar from Ready Player Me. Alsooo, i learned a lot watching WAWA SENSEI's videos on YouTube, so check him out if you want to learn more about three-fiber :-)",
+      plink: "Click on this to check out the code on GitHub :-) Thank you!",
+      pref: "https://github.com/brandonnwongg/reactportfolio",
+    },
+    {
+      ptitle: "(Currently in Development) ",
+      pdescription:
+        "An intelligent music recommendation tool that analyzes the tempo and energy of a given track to generate a curated playlist of songs with a similar vibe. ",
+      plink: "No link yet, sorry!",
+      pref: "",
+    },
+  ],
 };

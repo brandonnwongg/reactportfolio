@@ -12,8 +12,9 @@ import { useEffect, useRef, useState } from "react";
 import { config } from "../../config";
 import { motion } from "framer-motion-3d";
 import { animate, useMotionValue } from "framer-motion";
+import { PortfolioTV } from "./PortfolioTV";
 
-const SECTIONS_DISTANCE = 8;
+const SECTIONS_DISTANCE = 10;
 
 export const PortfolioExperience = () => {
   const [section, setSection] = useState(config.sections[0]);
@@ -137,6 +138,7 @@ export const PortfolioExperience = () => {
             },
           }}
         >
+          <PortfolioTV />
           <SectionTitle position-y={0.8}>ACADEMIC</SectionTitle>
           <SectionTitle>PROJECTS</SectionTitle>
         </motion.group>
