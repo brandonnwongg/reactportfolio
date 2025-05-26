@@ -11,17 +11,17 @@ import { SkeletonUtils } from "three-stdlib";
 import * as THREE from "three";
 
 export function Avatar(props) {
-  const { scene } = useGLTF("/models/Avatar.glb");
+  const { scene } = useGLTF(import.meta.env.BASE_URL + "models/Avatar.glb");
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = useGraph(clone);
   const { animations: sittingAnimation } = useFBX(
-    "/startingpageanimation/sitting.fbx"
+    import.meta.env.BASE_URL + "startingpageanimation/sitting.fbx"
   );
   const { animations: floatingAnimation } = useFBX(
-    "/startingpageanimation/floating.fbx"
+    import.meta.env.BASE_URL + "startingpageanimation/floating.fbx"
   );
   const { animations: excitedAnimation } = useFBX(
-    "/startingpageanimation/excited.fbx"
+    import.meta.env.BASE_URL + "startingpageanimation/excited.fbx"
   );
 
   sittingAnimation[0].name = "Sitting";
@@ -117,7 +117,7 @@ export function Avatar(props) {
   );
 }
 
-useGLTF.preload("/models/Avatar.glb");
-useFBX.preload("/startingpageanimation/excited.fbx");
-useFBX.preload("/startingpageanimation/floating.fbx");
-useFBX.preload("/startingpageanimation/sitting.fbx");
+useGLTF.preload(import.meta.env.BASE_URL + "models/Avatar.glb");
+useFBX.preload(import.meta.env.BASE_URL + "startingpageanimation/excited.fbx");
+useFBX.preload(import.meta.env.BASE_URL + "startingpageanimation/floating.fbx");
+useFBX.preload(import.meta.env.BASE_URL + "startingpageanimation/sitting.fbx");

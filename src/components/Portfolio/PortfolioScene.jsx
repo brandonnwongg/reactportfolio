@@ -7,7 +7,9 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function PortfolioScene(props) {
-  const { nodes, materials } = useGLTF("/models/portfolioscene.glb");
+  const { nodes, materials } = useGLTF(
+    import.meta.env.BASE_URL + "models/portfolioscene.glb"
+  );
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -89,4 +91,4 @@ export function PortfolioScene(props) {
   );
 }
 
-useGLTF.preload("/models/portfolioscene.glb");
+useGLTF.preload(import.meta.env.BASE_URL + "models/portfolioscene.glb");

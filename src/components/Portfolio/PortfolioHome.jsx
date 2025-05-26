@@ -10,7 +10,9 @@ import { motion } from "framer-motion-3d";
 
 export function PortfolioHome(props) {
   const groupRef = useRef();
-  const { nodes, materials } = useGLTF("/models/portfoliohome.glb");
+  const { nodes, materials } = useGLTF(
+    import.meta.env.BASE_URL + "models/portfoliohome.glb"
+  );
 
   const transition = {
     delay: 0.2,
@@ -216,4 +218,4 @@ export function PortfolioHome(props) {
   );
 }
 
-useGLTF.preload("/models/portfoliohome.glb");
+useGLTF.preload(import.meta.env.BASE_URL + "models/portfoliohome.glb");

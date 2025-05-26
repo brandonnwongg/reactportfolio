@@ -11,7 +11,9 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Laptop(props) {
-  const { nodes, materials } = useGLTF("/models/laptop.glb");
+  const { nodes, materials } = useGLTF(
+    import.meta.env.BASE_URL + "models/laptop.glb"
+  );
   return (
     <group
       {...props}
@@ -138,4 +140,4 @@ export function Laptop(props) {
   );
 }
 
-useGLTF.preload("/models/laptop.glb");
+useGLTF.preload(import.meta.env.BASE_URL + "models/laptop.glb");

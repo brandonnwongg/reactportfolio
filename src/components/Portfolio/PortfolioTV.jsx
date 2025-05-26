@@ -11,7 +11,9 @@ import { config } from "../../config";
 import { useFrame } from "@react-three/fiber";
 
 export function PortfolioTV(props) {
-  const { nodes, materials } = useGLTF("/models/TV.glb");
+  const { nodes, materials } = useGLTF(
+    import.meta.env.BASE_URL + "models/TV.glb"
+  );
 
   const [project] = useAtom(projectAtom);
   const imageTexture = useTexture(project.image);
@@ -182,4 +184,4 @@ config.AcademicProjects.forEach((project) => {
 config.AcademicProjects.forEach((project) => {
   useTexture.preload(project.clip);
 });
-useGLTF.preload("/models/TV.glb");
+useGLTF.preload(import.meta.env.BASE_URL + "models/TV.glb");

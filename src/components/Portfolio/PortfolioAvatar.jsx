@@ -10,15 +10,25 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 export function PortfolioAvatar(props) {
-  const { nodes, materials } = useGLTF("/models/PortfolioAvatar.glb");
+  const { nodes, materials } = useGLTF(
+    import.meta.env.BASE_URL + "models/PortfolioAvatar.glb"
+  );
 
   const { animations: enteringFallAnimation } = useFBX(
-    "/animations/enteringfall.fbx"
+    import.meta.env.BASE_URL + "animations/enteringfall.fbx"
   );
-  const { animations: standingAnimation } = useFBX("/animations/stand.fbx");
-  const { animations: neutralAnimation } = useFBX("/animations/idle.fbx");
-  const { animations: wavingAnimation } = useFBX("/animations/wave.fbx");
-  const { animations: walkingAnimation } = useFBX("/animations/walking.fbx");
+  const { animations: standingAnimation } = useFBX(
+    import.meta.env.BASE_URL + "animations/stand.fbx"
+  );
+  const { animations: neutralAnimation } = useFBX(
+    import.meta.env.BASE_URL + "animations/idle.fbx"
+  );
+  const { animations: wavingAnimation } = useFBX(
+    import.meta.env.BASE_URL + "animations/wave.fbx"
+  );
+  const { animations: walkingAnimation } = useFBX(
+    import.meta.env.BASE_URL + "animations/walking.fbx"
+  );
 
   const group = useRef();
   enteringFallAnimation[0].name = "Entering Fall";
@@ -222,9 +232,9 @@ export function PortfolioAvatar(props) {
   );
 }
 
-useGLTF.preload("/models/PortfolioAvatar.glb");
-useFBX.preload("/animations/enteringfall.fbx");
-useFBX.preload("/animations/stand.fbx");
-useFBX.preload("/animations/neutral.fbx");
-useFBX.preload("/animations/walking.fbx");
-useFBX.preload("/animations/wave.fbx");
+useGLTF.preload(import.meta.env.BASE_URL + "models/PortfolioAvatar.glb");
+useFBX.preload(import.meta.env.BASE_URL + "animations/enteringfall.fbx");
+useFBX.preload(import.meta.env.BASE_URL + "animations/stand.fbx");
+useFBX.preload(import.meta.env.BASE_URL + "animations/neutral.fbx");
+useFBX.preload(import.meta.env.BASE_URL + "animations/walking.fbx");
+useFBX.preload(import.meta.env.BASE_URL + "animations/wave.fbx");
