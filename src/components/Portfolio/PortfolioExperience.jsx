@@ -117,7 +117,7 @@ export const PortfolioExperience = () => {
           cellSize={1}
           cellThickness={0.6}
           infiniteGrid
-          fadeDistance={100}
+          fadeDistance={200}
           fadeStrength={15}
         />
         <PortfolioScene position={[0, 0, 15]} rotation={[0, Math.PI, 0]} />
@@ -168,7 +168,7 @@ export const PortfolioExperience = () => {
         >
           <PortfolioTV />
           <group position={[5, 0.5, 8]}>
-            <SectionTitle position-y={0.8}>ACADEMIC</SectionTitle>
+            <SectionTitle position-y={1}>ACADEMIC</SectionTitle>
             <SectionTitle>PROJECTS</SectionTitle>
           </group>
         </motion.group>

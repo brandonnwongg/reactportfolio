@@ -18,7 +18,7 @@ export const StartingScreen = () => {
   return (
     <>
       <Box />
-      <StaticStars nbParticles={1000} />
+      {/* <StaticStars nbParticles={1000} /> */}
       {/* <MovingStars nbParticles={800} /> */}
       {/* <Environment preset="night" /> */}
       {/* <pointLight

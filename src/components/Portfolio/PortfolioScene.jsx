@@ -13,48 +13,78 @@ export function PortfolioScene(props) {
       <mesh
         name="Sun"
         geometry={nodes.Sun.geometry}
-        material={materials["Material.001"]}
+        material={materials["Material.004"]}
+        position={[0, 7, 66.909]}
+        scale={0.737}
       />
-      {/* <mesh
-        name="Plane001"
-        geometry={nodes.Plane001.geometry}
-        material={materials["Mirror Surface"]}
-      />
-      <mesh
-        name="Plane001_1"
-        geometry={nodes.Plane001_1.geometry}
-        material={materials["Wire Floor"]}
-      /> */}
-      <mesh
-        name="Plane002"
-        geometry={nodes.Plane002.geometry}
-        material={materials["Mirror Surface.001"]}
-      />
-      <mesh
-        name="Plane002_1"
-        geometry={nodes.Plane002_1.geometry}
-        material={materials.Mountains}
-      />
-      <mesh
-        name="Plane004"
-        geometry={nodes.Plane004.geometry}
-        material={materials["Mirror Surface.003"]}
-      />
-      <mesh
-        name="Plane004_1"
-        geometry={nodes.Plane004_1.geometry}
-        material={materials["Mountains.001"]}
-      />
-      <mesh
-        name="Plane005"
-        geometry={nodes.Plane005.geometry}
-        material={materials["Mirror Surface.004"]}
-      />
-      <mesh
-        name="Plane005_1"
-        geometry={nodes.Plane005_1.geometry}
-        material={materials["Mountains.001"]}
-      />
+      <group
+        name="MountainF"
+        position={[0, 0, 50.216]}
+        scale={[1.308, 1.533, 1]}
+      >
+        <mesh
+          name="Plane002"
+          geometry={nodes.Plane002.geometry}
+          material={materials["Mirror Surface.001"]}
+        />
+        <mesh
+          name="Plane002_1"
+          geometry={nodes.Plane002_1.geometry}
+          material={materials.Mountains}
+        />
+      </group>
+      <group
+        name="Plane"
+        position={[0, -0.5, 85.839]}
+        scale={[26.908, 1, 12.145]}
+      >
+        <mesh
+          name="Plane009"
+          geometry={nodes.Plane009.geometry}
+          material={materials["Wire Floor"]}
+        />
+        <mesh
+          name="Plane009_1"
+          geometry={nodes.Plane009_1.geometry}
+          material={materials["Material.001"]}
+        />
+      </group>
+      <group
+        name="Left"
+        position={[31.777, -0.2, -246.415]}
+        rotation={[0, 1.564, 0]}
+        scale={[63.503, 1.872, 12.146]}
+      >
+        <mesh
+          name="Plane013"
+          geometry={nodes.Plane013.geometry}
+          material={materials["Wire Floor"]}
+        />
+        <mesh
+          name="Plane013_1"
+          geometry={nodes.Plane013_1.geometry}
+          material={materials["Material.001"]}
+        />
+      </group>
+      <group
+        name="Right"
+        position={[-37.4, -0.2, 42.648]}
+        rotation={[Math.PI, -1.565, Math.PI]}
+        scale={[63.503, 1.872, 12.146]}
+      >
+        <mesh
+          name="Plane016"
+          geometry={nodes.Plane016.geometry}
+          material={materials["Wire Floor"]}
+        />
+        <mesh
+          name="Plane016_1"
+          geometry={nodes.Plane016_1.geometry}
+          material={materials["Material.001"]}
+        />
+      </group>
+      {/* <mesh name="Plane001" geometry={nodes.Plane001.geometry} material={materials['Mirror Surface']} />
+      <mesh name="Plane001_1" geometry={nodes.Plane001_1.geometry} material={materials['Wire Floor']} /> */}
     </group>
   );
 }

@@ -14,7 +14,7 @@ function App() {
   return (
     <Canvas camera={{ position: [0, 0.5, 5], fov: 50 }}>
       <color attach="background" args={["#000000"]} />
-      <fog attach="fog" args={["#000000", -50, 50]} />
+      <fog attach="fog" args={["#000000", 100, 150]} />
       <ambientLight intensity={6} />
       <Experience />
       <MouseHoverMovement>
