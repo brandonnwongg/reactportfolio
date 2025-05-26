@@ -9,13 +9,13 @@ export const Ground = () => {
         blur={[1, 100]}
         resolution={2048}
         mixBlur={1}
-        mixStrength={50}
+        mixStrength={20}
         roughness={1}
         depthScale={3}
         minDepthThreshold={0.2}
         maxDepthThreshold={0.9}
         color="#050505"
-        metalness={0.5}
+        metalness={0.1}
       />
     </mesh>
   );

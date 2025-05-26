@@ -20,7 +20,7 @@ function App() {
       <Canvas camera={{ position: [0, 0.5, 5], fov: 50 }}>
         <EffectComposer>
           <Bloom
-            intensity={1}
+            intensity={0.2}
             kernelSize={3}
             luminanceThreshold={0.1}
             luminanceSmoothing={0.025}
