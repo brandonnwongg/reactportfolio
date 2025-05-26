@@ -29,7 +29,13 @@ export const StartingScreen = () => {
       /> */}
 
       <EffectComposer>
-        <Bloom mipmapBlur intensity={0.1} luminanceThreshold={1} />
+        <Bloom
+          intensity={1}
+          kernelSize={3}
+          luminanceThreshold={0.1}
+          luminanceSmoothing={0.025}
+          mipmapBlur
+        />
       </EffectComposer>
     </>
   );

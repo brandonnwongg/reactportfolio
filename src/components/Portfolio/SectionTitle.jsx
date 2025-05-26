@@ -1,65 +1,41 @@
-import { Text3D, Float } from "@react-three/drei";
+import { Text3D, Float, Center } from "@react-three/drei";
 
 export const SectionTitle = ({ children, ...props }) => {
   return (
     <Float
       floatIntensity={1}
-      rotationIntensity={0}
       speed={2}
-      floatingRange={[0, 0.1]}
+      rotationIntensity={0}
+      floatingRange={[0, 0.2]}
     >
-      <group position={[-2.5, 0.5, 0.5]}>
-        <group>
-          <Text3D
-            font={"fonts/Anton_Regular.json"}
-            size={0.62}
-            height={0.02}
-            position={[0, 0, 0]}
-            {...props}
-          >
-            {children}
-            <meshStandardMaterial color="black" />
-          </Text3D>
-        </group>
+      <group position={[-3, 0, -2]} scale={1}>
         <Text3D
-          font={"fonts/Anton_Regular.json"}
-          size={0.61}
-          height={0.02}
-          position={[0, 0, 0.048]}
+          font={"fonts/VT323_Regular.json"}
+          size={1.3}
+          height={0.1}
           {...props}
         >
           {children}
           <meshStandardMaterial color="black" />
         </Text3D>
+
         <Text3D
-          font={"fonts/Anton_Regular.json"}
-          size={0.6}
-          height={0.02}
-          position={[0, 0, 0.05]}
+          font={"fonts/VT323_Regular.json"}
+          size={1.28}
+          height={0.105}
           {...props}
         >
           {children}
-          <meshStandardMaterial color="red" />
+          <meshStandardMaterial color="#990000" />
         </Text3D>
         <Text3D
-          font={"fonts/Anton_Regular.json"}
-          size={0.59}
-          height={0.02}
-          position={[0, 0, 0.098]}
+          font={"fonts/VT323_Regular.json"}
+          size={1.26}
+          height={0.11}
           {...props}
         >
           {children}
-          <meshStandardMaterial color="black" />
-        </Text3D>
-        <Text3D
-          font={"fonts/Anton_Regular.json"}
-          size={0.58}
-          height={0.02}
-          position={[0, 0, 0.1]}
-          {...props}
-        >
-          {children}
-          <meshStandardMaterial color="yellow" />
+          <meshStandardMaterial color="#daa520" />
         </Text3D>
       </group>
     </Float>

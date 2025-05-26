@@ -71,7 +71,7 @@ export const Interface = () => {
             className="skills"
             whileInView="visible"
             initial="hidden"
-            viewport={{ amount: 0.3, once: false }}
+            viewport={{ amount: 0.1, once: false }}
             variants={{
               hidden: {},
               visible: {

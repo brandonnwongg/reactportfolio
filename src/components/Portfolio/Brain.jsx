@@ -235,7 +235,7 @@ export const Brain = () => {
     <>
       <motion.group
         ref={brainGroup}
-        position={[-1.5, 2, -2]}
+        position={[-0.5, 2, -2]}
         scale={0.5}
         position-y={-10.5}
         transition={{

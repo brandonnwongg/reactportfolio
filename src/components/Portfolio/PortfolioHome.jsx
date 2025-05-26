@@ -4,7 +4,7 @@ Command: npx gltfjsx@6.5.3 public/models/portfoliohome.glb -o src/components/Por
 */
 
 import React, { useRef } from "react";
-
+import { useFrame } from "@react-three/fiber";
 import { useGLTF, Float } from "@react-three/drei";
 import { motion } from "framer-motion-3d";
 
@@ -18,23 +18,42 @@ export function PortfolioHome(props) {
     ease: [0.25, 1, 0.5, 1],
   };
 
+  // cloud coming out of chimney ani
+  const bigCloudRef = useRef();
+  const cloudHRef = useRef();
+  const cloudLRef = useRef();
+
+  useFrame((state, delta) => {
+    const clouds = [bigCloudRef, cloudHRef, cloudLRef];
+
+    clouds.forEach((cloudRef) => {
+      if (cloudRef.current) {
+        cloudRef.current.position.y += delta * 0.3; // smoke rise speed
+
+        // If cloud goes too high, reset to bottom
+        if (cloudRef.current.position.y > 8) {
+          cloudRef.current.position.y = 4.5 + Math.random() * 0.5; // randomize a bit for realism
+        }
+      }
+    });
+  });
+
   return (
-    <group {...props} ref={groupRef} dispose={null}>
+    <group
+      {...props}
+      rotation-y={-0.75}
+      // position={(-2.5, 1, 0)} mobile later
+      position={[-4.5, 0.1, 0]}
+      ref={groupRef}
+      dispose={null}
+    >
       <Float
         floatIntensity={1}
         speed={2}
         rotationIntensity={0}
         floatingRange={[0, 0.2]}
       >
-        <mesh
-          name="House"
-          geometry={nodes.House.geometry}
-          material={materials["Material.002"]}
-          position={[-3.047, 1.344, -4.625]}
-          rotation={[-Math.PI, 1.042, -Math.PI]}
-          scale={[2.145, 1.153, 1.764]}
-        />
-        <motion.mesh
+        <motion.group
           position-y={50}
           transition={transition}
           variants={{
@@ -43,57 +62,126 @@ export function PortfolioHome(props) {
             },
           }}
         >
+          <group
+            name="House"
+            position={[-2.938, 1.181, -3.562]}
+            scale={[1.353, 1, 1.282]}
+          >
+            <mesh
+              name="Cube002"
+              geometry={nodes.Cube002.geometry}
+              material={materials.seethru}
+            />
+            <mesh
+              name="Cube002_1"
+              geometry={nodes.Cube002_1.geometry}
+              material={materials["Material.009"]}
+            />
+          </group>
+          <group name="Door" position={[-2.18, 0, -3.368]} scale={[1, 1, 0.57]}>
+            <mesh
+              name="Cube003"
+              geometry={nodes.Cube003.geometry}
+              material={materials.seethru}
+            />
+            <mesh
+              name="Cube003_1"
+              geometry={nodes.Cube003_1.geometry}
+              material={materials["Material.014"]}
+            />
+          </group>
+          <group
+            name="WindowL"
+            position={[0, 2.186, -2.56]}
+            rotation={[0, 0, -Math.PI]}
+            scale={[-1, -0.532, -0.321]}
+          >
+            <mesh
+              name="Cube005"
+              geometry={nodes.Cube005.geometry}
+              material={materials.seethru}
+            />
+            <mesh
+              name="Cube005_1"
+              geometry={nodes.Cube005_1.geometry}
+              material={materials["Material.014"]}
+            />
+          </group>
+          <group
+            name="Chimney"
+            position={[-2.949, 3.532, -4.941]}
+            rotation={[-0.493, 0, 0]}
+            scale={0.414}
+          >
+            <mesh
+              name="Plane004"
+              geometry={nodes.Plane004.geometry}
+              material={materials.seethru}
+            />
+            <mesh
+              name="Plane004_1"
+              geometry={nodes.Plane004_1.geometry}
+              material={materials["Material.009"]}
+            />
+          </group>
+          <group
+            ref={bigCloudRef}
+            name="Big_Cloud"
+            position={[-2.636, 4.861, -5.216]}
+            rotation={[-0.017, 0.165, -0.713]}
+            scale={[2.129, 1, 1]}
+          >
+            <mesh
+              name="Sphere_1"
+              geometry={nodes.Sphere_1.geometry}
+              material={materials.seethru}
+            />
+            <mesh
+              name="Sphere_2"
+              geometry={nodes.Sphere_2.geometry}
+              material={materials["Material.001"]}
+            />
+          </group>
+
+          <group
+            ref={cloudHRef}
+            name="CloudH"
+            position={[-2.636, 6.401, -4.942]}
+            scale={-0.501}
+          >
+            <mesh
+              name="Sphere001"
+              geometry={nodes.Sphere001.geometry}
+              material={materials.seethru}
+            />
+            <mesh
+              name="Sphere001_1"
+              geometry={nodes.Sphere001_1.geometry}
+              material={materials["Material.001"]}
+            />
+          </group>
+          <group
+            ref={cloudLRef}
+            name="CloudL"
+            position={[-2.952, 4.921, -4.942]}
+            scale={-0.412}
+          >
+            <mesh
+              name="Sphere002"
+              geometry={nodes.Sphere002.geometry}
+              material={materials.seethru}
+            />
+            <mesh
+              name="Sphere002_1"
+              geometry={nodes.Sphere002_1.geometry}
+              material={materials["Material.001"]}
+            />
+          </group>
           <mesh
-            name="Roof"
-            geometry={nodes.Roof.geometry}
-            material={materials["Material.013"]}
-            position={[-2.043, 2.856, -5.221]}
-            rotation={[0, -1.042, 0]}
-            scale={[0.638, 0.785, 1.201]}
-          />
-        </motion.mesh>
-        <motion.group
-          position-x={10}
-          transition={transition}
-          variants={{
-            Home: {
-              x: 0,
-            },
-          }}
-        >
-          <mesh
-            name="Windows"
-            geometry={nodes.Windows.geometry}
-            material={materials["Material.003"]}
-            position={[-2.817, 1.654, -2.28]}
-            rotation={[0, -1.042, -Math.PI / 2]}
-            scale={[-0.491, -0.367, -0.367]}
-          />
-          <mesh
-            name="Door"
-            geometry={nodes.Door.geometry}
-            material={materials["Material.011"]}
-            position={[-1.999, 0.942, -2.779]}
-            rotation={[-Math.PI, 1.042, -Math.PI]}
-            scale={[0.015, 0.74, 0.393]}
-          />
-        </motion.group>
-        <motion.group
-          position-x={-10}
-          transition={transition}
-          variants={{
-            Home: {
-              x: 0,
-            },
-          }}
-        >
-          <mesh
-            name="WindowsR"
-            geometry={nodes.WindowsR.geometry}
-            material={materials["Material.003"]}
-            position={[-4.688, 1.608, -3.836]}
-            rotation={[0, 0.529, -Math.PI / 2]}
-            scale={[-0.491, -0.367, -0.367]}
+            name="Sphere"
+            geometry={nodes.Sphere.geometry}
+            material={materials.Material}
+            position={[-2.65, 3.001, -3.609]}
           />
         </motion.group>
         <motion.group
@@ -106,20 +194,20 @@ export function PortfolioHome(props) {
           }}
         >
           <group
-            name="Plane"
-            position={[-2.749, 0.184, -4.181]}
-            rotation={[-Math.PI, 1.042, -Math.PI]}
-            scale={[3.797, 11.035, 2.844]}
+            name="Floor"
+            position={[-2.949, 3.532, -4.941]}
+            rotation={[-0.493, 0, 0]}
+            scale={0.414}
           >
             <mesh
-              name="Plane003"
-              geometry={nodes.Plane003.geometry}
-              material={materials["Material.005"]}
+              name="Plane001"
+              geometry={nodes.Plane001.geometry}
+              material={materials.seethru}
             />
             <mesh
-              name="Plane003_1"
-              geometry={nodes.Plane003_1.geometry}
-              material={materials["Material.007"]}
+              name="Plane001_1"
+              geometry={nodes.Plane001_1.geometry}
+              material={materials["Material.016"]}
             />
           </group>
         </motion.group>

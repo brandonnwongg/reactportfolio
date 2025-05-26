@@ -30,7 +30,7 @@ body {
 }
 
 .section {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,8 +87,8 @@ body {
   border-radius: 14px;
   display: flex;
   justify-content: center;
-  margin-bottom: 4rem;
-  box-shadow: 0 0 12px #ffff33, 0 0 22px #ffff33;
+  margin-bottom: 0rem;
+  box-shadow: 0 0 5px #ffff33, 0 0 10px #ffff33;
 }
 
 .scroll-down__wheel {

@@ -14,7 +14,7 @@ import { motion } from "framer-motion-3d";
 import { animate, useMotionValue } from "framer-motion";
 import { PortfolioTV } from "./PortfolioTV";
 
-const SECTIONS_DISTANCE = 10;
+const SECTIONS_DISTANCE = 15;
 
 export const PortfolioExperience = () => {
   const [section, setSection] = useState(config.sections[0]);
@@ -23,8 +23,8 @@ export const PortfolioExperience = () => {
   const { camera } = useThree();
 
   const sceneTransition = {
-    delay: 0.3,
-    duration: 1.5,
+    delay: 0.5,
+    duration: 2,
     ease: [0.22, 1, 0.36, 1],
   };
 
@@ -48,24 +48,48 @@ export const PortfolioExperience = () => {
     }
   }, [section]);
 
-  useFrame(() => {
-    sceneContainer.current.position.z =
-      -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+  // const lastSectionIndex = useRef(0);
 
-    setSection(
-      config.sections[Math.round(scrollData.offset * (scrollData.pages - 1))]
-    );
+  // useFrame(() => {
+  //   const currentIndex = Math.round(scrollData.offset * (scrollData.pages - 1));
+
+  //   if (currentIndex !== lastSectionIndex.current) {
+  //     lastSectionIndex.current = currentIndex;
+  //     setSection(config.sections[currentIndex]);
+  //   }
+
+  //   sceneContainer.current.position.z =
+  //     -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+
+  //   camera.position.set(cameraX.get(), cameraY.get(), cameraZ.get());
+  //   camera.lookAt(lookAtX.get(), 0, -2);
+  // });
+
+  const sectionRanges = [
+    { name: "Home", start: 0, end: 0.1 },
+    { name: "Skills", start: 0.1, end: 0.3 },
+    { name: "AcademicProjects", start: 0.3, end: 0.68 },
+    { name: "PersonalProjects", start: 0.68, end: 0.84 },
+    { name: "Contact", start: 0.84, end: 1 },
+  ];
+
+  useFrame(() => {
+    const offset = scrollData.offset;
+
+    const current = sectionRanges.find((range) => {
+      return offset >= range.start && offset < range.end;
+    });
+
+    if (current && current.name !== section) {
+      setSection(current.name);
+    }
+
+    sceneContainer.current.position.z =
+      -offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+
     camera.position.set(cameraX.get(), cameraY.get(), cameraZ.get());
     camera.lookAt(lookAtX.get(), 0, -2);
   });
-
-  // useControls("Helper", {
-  //   getLookAt: button(() => {
-  //     const position = controls.current.position;
-  //     const target = controls.current.getTarget();
-  //     console.log([ ...position, ...target ]);
-  //   }),
-  // });
 
   return (
     <>
@@ -109,7 +133,9 @@ export const PortfolioExperience = () => {
         >
           <PortfolioHome />
 
-          <SectionTitle>HOME</SectionTitle>
+          <SectionTitle rotation-y={0.75} position-z={0.5} position-y={0.5}>
+            HOME
+          </SectionTitle>
         </motion.group>
         {/* SKILLS */}
         <motion.group
@@ -124,13 +150,15 @@ export const PortfolioExperience = () => {
           }}
         >
           <Brain />
-          <SectionTitle>SKILLS</SectionTitle>
+          <SectionTitle position-x={0.5} rotation-y={-0.25}>
+            SKILLS
+          </SectionTitle>
         </motion.group>
         {/* ACADMEIC PROJECTS */}
         <motion.group
           scale={0.5}
-          position-z={2 * SECTIONS_DISTANCE}
-          position-y={-3.5}
+          position-z={2 * SECTIONS_DISTANCE + 1.5}
+          position-y={-7}
           transition={sceneTransition}
           variants={{
             AcademicProjects: {
@@ -139,8 +167,10 @@ export const PortfolioExperience = () => {
           }}
         >
           <PortfolioTV />
-          <SectionTitle position-y={0.8}>ACADEMIC</SectionTitle>
-          <SectionTitle>PROJECTS</SectionTitle>
+          <group position={[5, 0.5, 8]}>
+            <SectionTitle position-y={0.8}>ACADEMIC</SectionTitle>
+            <SectionTitle>PROJECTS</SectionTitle>
+          </group>
         </motion.group>
         {/* PERSONAL PROJECTS */}
         <motion.group

@@ -12,9 +12,9 @@ import { Interface } from "./components/Portfolio/Interface";
 
 function App() {
   return (
-    <Canvas camera={{ position: [0, 0.5, 5], fov: 42 }}>
+    <Canvas camera={{ position: [0, 0.5, 5], fov: 50 }}>
       <color attach="background" args={["#000000"]} />
-      <fog attach="fog" args={["#000000", -50, 60]} />
+      <fog attach="fog" args={["#000000", -50, 50]} />
       <ambientLight intensity={6} />
       <Experience />
       <MouseHoverMovement>
@@ -38,7 +38,7 @@ function App() {
           </MotionConfig>
 
           <Scroll html>
-            <MotionConfig transition={{ duration: 2 }}>
+            <MotionConfig transition={{ duration: 1 }}>
               <Interface />
             </MotionConfig>
           </Scroll>

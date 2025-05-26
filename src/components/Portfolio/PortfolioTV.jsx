@@ -63,22 +63,31 @@ export function PortfolioTV(props) {
     };
   }, [project.clip, project.image, isVideo, imageTexture]);
 
-  const emissiveRef = useRef();
+  const emissiveRef1 = useRef();
+  const emissiveRef2 = useRef();
 
-  useFrame(({ clock }) => {
-    if (emissiveRef.current) {
-      emissiveRef.current.emissiveIntensity = Math.random() > 0.9 ? 2 : 1;
+  useFrame(() => {
+    if (emissiveRef1.current) {
+      emissiveRef1.current.emissiveIntensity = Math.random() > 0.9 ? 2.5 : 1.2;
+    }
+    if (emissiveRef2.current) {
+      emissiveRef2.current.emissiveIntensity = Math.random() > 0.8 ? 2 : 1;
     }
   });
+
   return (
     <group
       {...props}
       dispose={null}
       scale={0.8}
       position={[3, 0.45, 0]}
-      rotation={[0, -2, 0]}
+      rotation={[0, -2.1, 0]}
     >
-      <group name="Cube" position={[0, 4.003, 0]} scale={[2.034, 3.646, 3.883]}>
+      <group
+        name="Cube"
+        position={[-0.055, 4.033, 0]}
+        scale={[-2.064, -3.672, -4.819]}
+      >
         <mesh
           name="Cube_1"
           geometry={nodes.Cube_1.geometry}
@@ -87,42 +96,19 @@ export function PortfolioTV(props) {
         <mesh
           name="Cube_2"
           geometry={nodes.Cube_2.geometry}
-          material={materials["Material.002"]}
-        />
-      </group>
-      <mesh
-        name="Legs"
-        geometry={nodes.Legs.geometry}
-        material={materials["Material.006"]}
-        position={[1.437, 0, 3.157]}
-      />
-      <group
-        name="Screen"
-        position={[2.3, 4.933, 0]}
-        rotation={[0, 0, -Math.PI / 2]}
-        scale={[2.192, 1.961, 3.099]}
-      >
-        {texture && (
-          <mesh name="Plane" geometry={nodes.Plane.geometry}>
-            <meshBasicMaterial map={texture} />
-          </mesh>
-        )}
-        <mesh
-          name="Plane_1"
-          geometry={nodes.Plane_1.geometry}
-          material={materials["Material.005"]}
+          material={materials["Material.003"]}
         />
       </group>
       <group
-        name="Screen2"
-        position={[2.3, 1.711, 0]}
-        rotation={[0, 0, -Math.PI / 2]}
-        scale={[0.527, 1.961, 3.099]}
+        name="Plane"
+        position={[2.157, 0.911, -3.016]}
+        rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+        scale={[0.283, 0.307, 0.283]}
       >
-        <mesh name="Plane001" geometry={nodes.Plane001.geometry}>
+        <mesh name="Plane002" geometry={nodes.Plane002.geometry}>
           <meshStandardMaterial
-            ref={emissiveRef}
-            emissive="#ffff00"
+            ref={emissiveRef1}
+            emissive="#39ff14"
             emissiveIntensity={1.5}
             metalness={0.3}
             color="black"
@@ -130,14 +116,66 @@ export function PortfolioTV(props) {
           />
         </mesh>
         <mesh
-          name="Plane001_1"
-          geometry={nodes.Plane001_1.geometry}
+          name="Plane002_1"
+          geometry={nodes.Plane002_1.geometry}
           material={materials["Material.005"]}
         />
       </group>
+      <group
+        name="Plane001"
+        position={[2.157, 0.911, -2.196]}
+        rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+        scale={[0.283, 0.307, 0.283]}
+      >
+        <mesh name="Plane003" geometry={nodes.Plane003.geometry}>
+          <meshStandardMaterial
+            ref={emissiveRef2}
+            emissive="#ff2400"
+            emissiveIntensity={1.5}
+            metalness={0.3}
+            color="black"
+            opacity={1}
+          />
+        </mesh>
+        <mesh
+          name="Plane003_1"
+          geometry={nodes.Plane003_1.geometry}
+          material={materials["Material.005"]}
+        />
+      </group>
+      <group
+        name="Screen"
+        position={[2.157, 4.078, 0.122]}
+        rotation={[0, 0, -Math.PI / 2]}
+        scale={[3.118, 1.961, 3.399]}
+      >
+        {texture && (
+          <mesh name="Plane_1" geometry={nodes.Plane_1.geometry}>
+            <meshBasicMaterial map={texture} />
+          </mesh>
+        )}
+        <mesh
+          name="Plane_2"
+          geometry={nodes.Plane_2.geometry}
+          material={materials["Material.005"]}
+        />
+      </group>
+      <mesh
+        name="Legs"
+        geometry={nodes.Legs.geometry}
+        material={materials["Material.006"]}
+        position={[1.246, -0.14, 3.157]}
+      />
+      {/* <mesh
+        name="Sphere"
+        geometry={nodes.Sphere.geometry}
+        material={materials["Material.007"]}
+        position={[-0.235, 6.335, 0.188]}
+      /> */}
     </group>
   );
 }
+
 config.AcademicProjects.forEach((project) => {
   useTexture.preload(project.image);
 });
