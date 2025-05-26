@@ -48,6 +48,18 @@ export const PortfolioExperience = () => {
     }
   }, [section]);
 
+  // useEffect(() => {
+  //   const handleHashChange = () => {
+  //     const sectionName = window.location.hash.replace("#", "");
+  //     if (config.sections.includes(sectionName)) {
+  //       setSection(sectionName); // Let your existing `useEffect` for camera handle everything
+  //     }
+  //   };
+  //   window.addEventListener("hashchange", handleHashChange);
+  //   handleHashChange();
+  //   return () => window.removeEventListener("hashchange", handleHashChange);
+  // }, []);
+
   // const lastSectionIndex = useRef(0);
 
   // useFrame(() => {

@@ -4,6 +4,7 @@ import { useControls } from "leva";
 import { useHelper } from "@react-three/drei";
 import * as THREE from "three";
 
+//i used this for help position objects
 export const Box = () => {
   const groupRef = useRef();
 
