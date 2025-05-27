@@ -21,8 +21,6 @@ export const Interface = () => {
 
   const [_project, setProject] = useAtom(projectAtom);
 
-  console.log("config.Contact:", config.Contact);
-
   useFrame(() => {
     setHasScrolled(scrollData.offset > 0);
   });
