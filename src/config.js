@@ -1,4 +1,5 @@
 export const config = {
+  // loadingtitle: "Brandon's Portfolio",
   sections: [
     "Home",
     "Skills",
@@ -142,4 +143,13 @@ export const config = {
       pref: "",
     },
   ],
+
+  Contact: {
+    name: "Brandon Wong Shou Yuan",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/wong-brandon1998/",
+      github: "https://github.com/brandonnwongg",
+    },
+    mail: "wong_brandon@outlook.com",
+  },
 };

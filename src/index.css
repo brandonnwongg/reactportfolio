@@ -311,32 +311,73 @@ body {
   }
 }
 
+.contact__socials {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.contact__socials__icon {
+  height: 50px;
+  width: 50px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5), -5px 0 0 0 white, 5px 0 0 0 white,
+    0 -5px 0 0 white, 0 5px 0 0 white;
+  background: rgba(249, 249, 249, 0.5);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
+}
+
+.contact__socials__icon:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 102, 0.8), 0 0 10px #ffff33,
+    0 0 20px #ffff33;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 /* Menu */
 .menu {
   display: flex;
   justify-content: space-between;
+  font-size: 1.5rem;
   align-items: center;
-  padding: 1rem;
+  padding: 0.3rem;
   position: fixed;
-  top: 0;
+  top: 0.2rem;
   left: 4rem;
   right: 4rem;
-  background: #f5f3ef8a;
-  backdrop-filter: blur(8px);
+  letter-spacing: 1.2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(7px);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), -2px 0 0 0 white, 2px 0 0 0 white,
+    0 -2px 0 0 white, 0 2px 0 0 white;
+}
+
+.menu__logo {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+  letter-spacing: 3px;
+  /* object-fit: contain; */
 }
 
 .menu__buttons {
   display: flex;
-  gap: 1rem;
+  gap: 2rem; /* Default large screen */
   align-items: center;
 }
 
 .menu__button {
   font-weight: bold;
-  color: var(--text-color);
+  color: black;
 }
 
 .menu__button:hover {
   color: var(--primary-color);
   cursor: pointer;
+}
+
+.contact {
+  width: 100%;
 }

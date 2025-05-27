@@ -48,60 +48,65 @@ export const PortfolioExperience = () => {
     }
   }, [section]);
 
-  // useEffect(() => {
-  //   const handleHashChange = () => {
-  //     const sectionName = window.location.hash.replace("#", "");
-  //     if (config.sections.includes(sectionName)) {
-  //       setSection(sectionName); // Let your existing `useEffect` for camera handle everything
-  //     }
-  //   };
-  //   window.addEventListener("hashchange", handleHashChange);
-  //   handleHashChange();
-  //   return () => window.removeEventListener("hashchange", handleHashChange);
-  // }, []);
-
-  // const lastSectionIndex = useRef(0);
-
-  // useFrame(() => {
-  //   const currentIndex = Math.round(scrollData.offset * (scrollData.pages - 1));
-
-  //   if (currentIndex !== lastSectionIndex.current) {
-  //     lastSectionIndex.current = currentIndex;
-  //     setSection(config.sections[currentIndex]);
-  //   }
-
-  //   sceneContainer.current.position.z =
-  //     -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
-
-  //   camera.position.set(cameraX.get(), cameraY.get(), cameraZ.get());
-  //   camera.lookAt(lookAtX.get(), 0, -2);
-  // });
-
-  const sectionRanges = [
-    { name: "Home", start: 0, end: 0.1 },
-    { name: "Skills", start: 0.1, end: 0.3 },
-    { name: "AcademicProjects", start: 0.3, end: 0.68 },
-    { name: "PersonalProjects", start: 0.68, end: 0.84 },
-    { name: "Contact", start: 0.84, end: 1 },
-  ];
+  useEffect(() => {
+    const handleHashChange = () => {
+      const sectionIndex = config.sections.indexOf(
+        window.location.hash.replace("#", "")
+      );
+      if (sectionIndex !== -1) {
+        scrollData.el.scrollTo(
+          0,
+          (sectionIndex / (config.sections.length - 1)) *
+            (scrollData.el.scrollHeight - scrollData.el.clientHeight)
+        );
+      }
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    handleHashChange();
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+  const lastSectionIndex = useRef(0);
 
   useFrame(() => {
-    const offset = scrollData.offset;
+    const currentIndex = Math.round(scrollData.offset * (scrollData.pages - 1));
 
-    const current = sectionRanges.find((range) => {
-      return offset >= range.start && offset < range.end;
-    });
-
-    if (current && current.name !== section) {
-      setSection(current.name);
+    if (currentIndex !== lastSectionIndex.current) {
+      lastSectionIndex.current = currentIndex;
+      setSection(config.sections[currentIndex]);
     }
 
     sceneContainer.current.position.z =
-      -offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+      -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
 
     camera.position.set(cameraX.get(), cameraY.get(), cameraZ.get());
     camera.lookAt(lookAtX.get(), 0, -2);
   });
+
+  // const sectionRanges = [
+  //   { name: "Home", start: 0, end: 0.1 },
+  //   { name: "Skills", start: 0.1, end: 0.3 },
+  //   { name: "AcademicProjects", start: 0.3, end: 0.68 },
+  //   { name: "PersonalProjects", start: 0.68, end: 0.84 },
+  //   { name: "Contact", start: 0.84, end: 1 },
+  // ];
+
+  // useFrame(() => {
+  //   const offset = scrollData.offset;
+
+  //   const current = sectionRanges.find((range) => {
+  //     return offset >= range.start && offset < range.end;
+  //   });
+
+  //   if (current && current.name !== section) {
+  //     setSection(current.name);
+  //   }
+
+  //   sceneContainer.current.position.z =
+  //     -offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+
+  //   camera.position.set(cameraX.get(), cameraY.get(), cameraZ.get());
+  //   camera.lookAt(lookAtX.get(), 0, -2);
+  // });
 
   return (
     <>
@@ -196,8 +201,10 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <SectionTitle position-y={0.8}>PERSONAL</SectionTitle>
-          <SectionTitle>PROJECTS</SectionTitle>
+          <group position-z={3}>
+            <SectionTitle position-y={1}>PERSONAL</SectionTitle>
+            <SectionTitle>PROJECTS</SectionTitle>
+          </group>
         </motion.group>
         {/* CONTACT */}
         <motion.group
@@ -211,7 +218,7 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <SectionTitle>CONTACT</SectionTitle>
+          {/* <SectionTitle>CONTACT</SectionTitle> */}
         </motion.group>
       </motion.group>
     </>

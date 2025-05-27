@@ -21,7 +21,7 @@ export const Interface = () => {
 
   const [_project, setProject] = useAtom(projectAtom);
 
-  console.log("config.AcademicProjects:", config.AcademicProjects);
+  console.log("config.Contact:", config.Contact);
 
   useFrame(() => {
     setHasScrolled(scrollData.offset > 0);
@@ -39,6 +39,29 @@ export const Interface = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1, delay: 2 }}
             >
+              <div className="contact__socials">
+                <a href={config.Contact.socials.linkedin} target="_blank">
+                  <img
+                    className="contact__socials__icon"
+                    src="images/linkedin.png"
+                    alt="linkedin"
+                  />
+                </a>
+                <a href={config.Contact.socials.github} target="_blank">
+                  <img
+                    className="contact__socials__icon"
+                    src="images/github.png"
+                    alt="git"
+                  />
+                </a>
+                <a href={`mailto:${config.Contact.mail}`} target="_blank">
+                  <img
+                    className="contact__socials__icon"
+                    src="images/email.png"
+                    alt="email"
+                  />
+                </a>
+              </div>
               {Object.entries(config.Home).map(([key, value]) => (
                 <div className="home-info-line" key={key}>
                   <span className="home-label">{key}:</span>
@@ -233,26 +256,12 @@ export const Interface = () => {
               },
             }}
           >
-            {/* <h1 className="contact__name">{config.contact.name}</h1>
-            <p className="contact__address">{config.contact.address}</p>
-            <div className="contact__socials">
-              <a href={config.contact.socials.linkedin} target="_blank">
-              </a>
-              <a href={config.contact.socials.twitter} target="_blank">
-                <img
-                  className="contact__socials__icon"
-                  src="icons/twitter.png"
-                  alt="twitter"
-                />
-              </a>
-              <a href={`mailto:${config.contact.mail}`} target="_blank">
-                <img
-                  className="contact__socials__icon"
-                  src="icons/email.png"
-                  alt="email"
-                />
-              </a> */}
-            {/* </div> */}
+            {/* <h1 className="contact__name">{config.Contact.name}</h1> */}
+            {/* <div className="contact__socials">
+              <a href={config.Contact.socials.linkedin} target="_blank"></a>
+              <a href={config.Contact.socials.github} target="_blank"></a>
+              <a href={`mailto:${config.Contact.mail}`} target="_blank"></a>
+            </div> */}
           </motion.div>
         </section>
       </div>
