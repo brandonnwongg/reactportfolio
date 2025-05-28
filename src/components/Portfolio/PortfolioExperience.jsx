@@ -13,6 +13,7 @@ import { config } from "../../config";
 import { motion } from "framer-motion-3d";
 import { animate, useMotionValue } from "framer-motion";
 import { PortfolioTV } from "./PortfolioTV";
+import { PortfolioLaptop } from "./PortfolioLaptop";
 
 const SECTIONS_DISTANCE = 15;
 
@@ -110,7 +111,7 @@ export const PortfolioExperience = () => {
 
   return (
     <>
-      <Environment preset="sunset" />
+      {/* <Environment preset="sunset" /> */}
       {/* <axesHelper /> */}
 
       <PortfolioAvatar />
@@ -129,13 +130,13 @@ export const PortfolioExperience = () => {
         <Grid
           position={[0, 0.1, 0]}
           sectionSize={1.5}
-          sectionColor={"#9D00FF"}
+          sectionColor={"#4B713F"}
           sectionThickness={5}
           cellSize={1}
           cellThickness={0.6}
           infiniteGrid
           fadeDistance={200}
-          fadeStrength={15}
+          fadeStrength={10}
         />
         <PortfolioScene position={[0, 0, 15]} rotation={[0, Math.PI, 0]} />
         {/* HOME */}
@@ -148,8 +149,11 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <PortfolioHome />
-
+          <PortfolioHome
+            rotation-y={-0.75}
+            position={[-3.5, 0.3, -0.3]}
+            scale={0.7}
+          />
           <SectionTitle rotation-y={0.75} position-z={0.5} position-y={0.5}>
             HOME
           </SectionTitle>
@@ -174,7 +178,7 @@ export const PortfolioExperience = () => {
         {/* ACADMEIC PROJECTS */}
         <motion.group
           scale={0.5}
-          position-z={2 * SECTIONS_DISTANCE + 1.5}
+          position-z={2 * SECTIONS_DISTANCE}
           position-y={-7}
           transition={sceneTransition}
           variants={{
@@ -183,8 +187,12 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <PortfolioTV />
-          <group position={[5, 0.5, 8]}>
+          <PortfolioTV
+            scale={0.8}
+            position={[3, 0.45, 0]}
+            rotation={[0, -2.1, 0]}
+          />
+          <group position={[5, 0.5, 5]}>
             <SectionTitle position-y={1}>ACADEMIC</SectionTitle>
             <SectionTitle>PROJECTS</SectionTitle>
           </group>
@@ -201,7 +209,12 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <group position-z={3}>
+          <PortfolioLaptop
+            rotation={[0, 0.5, 0]}
+            scale={1.5}
+            position={[-3, 2, 0]}
+          />
+          <group position-x={2}>
             <SectionTitle position-y={1}>PERSONAL</SectionTitle>
             <SectionTitle>PROJECTS</SectionTitle>
           </group>

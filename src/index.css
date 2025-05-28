@@ -101,10 +101,17 @@ body {
 }
 
 /* SKILLS */
-
+/* 
 .skills {
   padding: 1rem;
   flex-direction: column;
+} phone */
+
+.skills {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
 
 .skill-category {
@@ -169,7 +176,7 @@ body {
 .academics {
   padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 230px);
+  grid-template-columns: repeat(3, 1fr);
   width: 550px;
   max-width: 100%;
   justify-content: center;
