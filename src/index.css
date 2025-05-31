@@ -17,6 +17,13 @@ body {
   font-family: "VT323", monospace;
 }
 
+input,
+textarea,
+button {
+  font-family: "VT323", monospace;
+  font-size: 1.1rem;
+}
+
 .interface {
   width: 100vw;
   display: flex;
@@ -52,12 +59,17 @@ body {
   justify-content: flex-start;
 }
 
+.section--left--contact {
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
 /* HOME SECTION */
 .home {
   padding: 2rem;
 }
 
-.home-info-line {
+.home-text {
   font-size: 2.5rem;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5), -5px 0 0 0 white, 5px 0 0 0 white,
     0 -5px 0 0 white, 0 5px 0 0 white;
@@ -65,10 +77,11 @@ body {
   color: white;
   background: rgba(249, 249, 249, 0.1);
   backdrop-filter: blur(3px);
+  max-width: 300px;
   transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
 }
 
-.home-info-line:hover {
+.home-text:hover {
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 -10px #ff00c8,
     0 0 -20px #ff00c8;
   color: yellow;
@@ -82,11 +95,11 @@ body {
   height: 50px;
   left: 50%;
   transform: translateX(-50%);
+  position: fixed;
   justify-content: center;
   border: 2px solid var(--text-color);
   border-radius: 14px;
   display: flex;
-  justify-content: center;
   margin-bottom: 0rem;
   box-shadow: 0 0 5px #ffff33, 0 0 10px #ffff33;
 }
@@ -118,8 +131,9 @@ body {
   margin: 1.5rem 0;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5), -5px 0 0 0 white, 5px 0 0 0 white,
     0 -5px 0 0 white, 0 5px 0 0 white;
-  background: rgba(249, 249, 249, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(1px);
+
   color: white;
   max-width: 100%;
   font-size: 2rem;
@@ -186,8 +200,9 @@ body {
 .academic-project {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5), -5px 0 0 0 white, 5px 0 0 0 white,
     0 -5px 0 0 white, 0 5px 0 0 white;
-  background: rgba(249, 249, 249, 0.1);
-  backdrop-filter: blur(1px);
+  animation: buttonflicker 2s infinite;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
   overflow: hidden;
   transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
 }
@@ -256,8 +271,9 @@ body {
 .personal-project {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5), -5px 0 0 0 white, 5px 0 0 0 white,
     0 -5px 0 0 white, 0 5px 0 0 white;
-  background: rgba(249, 249, 249, 0.1);
-  backdrop-filter: blur(1px);
+  animation: buttonflicker 2s infinite;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
   overflow: hidden;
   transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
 }
@@ -318,12 +334,58 @@ body {
   }
 }
 
+@keyframes buttonflicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    box-shadow: 0 0 25px rgba(255, 255, 102, 0.8), 0 0 10px #ffff33,
+      0 0 20px #ffff33, -5px 0 0 0 white, 5px 0 0 0 white, 0 -5px 0 0 white,
+      0 5px 0 0 white;
+  }
+  20%,
+  24%,
+  55% {
+    box-shadow: 0 0 10px rgba(255, 255, 102, 0.8), 0 0 5px #ffff33,
+      0 0 5px #ffff33, -5px 0 0 0 white, 5px 0 0 0 white, 0 -5px 0 0 white,
+      0 5px 0 0 white;
+  }
+}
+
+/* CONTACT SECTION */
+
+.contact {
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5), -5px 0 0 0 white, 5px 0 0 0 white,
+    0 -5px 0 0 white, 0 5px 0 0 white;
+  backdrop-filter: blur(8px);
+  max-width: 450px;
+}
+
+.contact__name {
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.contact__address {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  margin: 0;
+}
 .contact__socials {
   display: flex;
   gap: 2rem;
   justify-content: center;
   align-items: center;
 }
+
 .contact__socials__icon {
   height: 50px;
   width: 50px;
@@ -331,6 +393,7 @@ body {
     0 -5px 0 0 white, 0 5px 0 0 white;
   background: rgba(249, 249, 249, 0.5);
   backdrop-filter: blur(10px);
+  animation: buttonflicker 2s infinite;
   overflow: hidden;
   transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
 }
@@ -342,6 +405,71 @@ body {
   cursor: pointer;
 }
 
+.comment-form {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment-input {
+  color: white;
+  background: rgba(249, 249, 249, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.contact__comment {
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+.comment-strip {
+  display: flex;
+  gap: 2rem;
+  animation: scrollStrip 30s linear infinite;
+  white-space: nowrap;
+}
+
+.comment-marquee {
+  flex: 0 0 auto;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5), -5px 0 0 0 white, 5px 0 0 0 white,
+    0 -5px 0 0 white, 0 5px 0 0 white;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  height: 14rem;
+  width: 12rem;
+}
+
+.comment-scroll {
+  display: inline-block;
+}
+
+.comment-name,
+.comment-text {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  display: inline-block;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.comment-says {
+  color: white;
+  font-size: 1.5rem;
+}
+
+@keyframes scrollStrip {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 /* Menu */
 .menu {
   display: flex;
@@ -363,21 +491,21 @@ body {
 .menu__logo {
   font-family: "Courier New", monospace;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #333;
   letter-spacing: 3px;
-  /* object-fit: contain; */
 }
 
 .menu__buttons {
   display: flex;
-  gap: 2rem; /* Default large screen */
+  gap: 1rem; /* Default large screen */
   align-items: center;
 }
 
 .menu__button {
   font-weight: bold;
   color: black;
+  text-decoration: none;
 }
 
 .menu__button:hover {

@@ -10,14 +10,14 @@ export const Menu = () => {
           SKILLS
         </a>
         <a className="menu__button" href="#AcademicProjects">
-          ACADEMIC PROJECTS
+          ACADEMIC-PROJECTS
         </a>
         <a className="menu__button" href="#PersonalProjects">
-          PERSONAL PROJECTS
+          PERSONAL-PROJECTS
         </a>
-        {/* <a className="menu__button" href="#Contact">
+        <a className="menu__button" href="#Contact">
           CONTACT
-        </a> */}
+        </a>
       </div>
     </div>
   );

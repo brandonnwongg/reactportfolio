@@ -8,12 +8,7 @@ export const config = {
     "Contact",
   ],
   Home: {
-    Name: "Brandon Wong",
-    Age: "27",
-    "Date Of Birth": "1998-01-01",
-    Location: "Berlin, Germany",
-    Occupation: "Computer Science Student",
-    University: "HTW Berlin",
+    Text: "Hi! I'm Brandon, 27 years old and currently doing my Bachelor's in Computer Science at HTW Berlin. Thanks for checking out my portfolio!",
   },
 
   Skills: {
@@ -131,25 +126,27 @@ export const config = {
     {
       ptitle: "Portfolio",
       pdescription:
-        "This portfolio is built with React, three-fiber, and Framer Motion. Some of the Models ive created using Blender and exported to GLTF format for use in the 3D scene, and some are downloaded from Sketchfab. Also, the animations are created using Mixamo and exported to FBX format for use in the 3D scene, and avatar from Ready Player Me. Alsooo, i learned a lot watching WAWA SENSEI's videos on YouTube, so check him out if you want to learn more about three-fiber :-)",
-      plink: "Click on this to check out the code on GitHub :-) Thank you!",
+        "This portfolio was developed with React, three-fiber and framer-motion. Check out Wawa Sensei on Youtube!",
       pref: "https://github.com/brandonnwongg/reactportfolio",
     },
     {
       ptitle: "(Currently in Development) ",
       pdescription:
         "An intelligent music recommendation tool that analyzes the tempo and energy of a given track to generate a curated playlist of songs with a similar vibe. ",
-      plink: "No link yet, sorry!",
       pref: "",
     },
   ],
 
   Contact: {
-    name: "Brandon Wong Shou Yuan",
+    contactname: "Brandon Wong Shou Yuan",
+    address: "Berlin, Germany",
     socials: {
       linkedin: "https://www.linkedin.com/in/wong-brandon1998/",
       github: "https://github.com/brandonnwongg",
+      insta: "https://github.com/brandonnwongg",
+      cv: "https://github.com/brandonnwongg",
     },
     mail: "wong_brandon@outlook.com",
+    comment: "Leave a comment!",
   },
 };

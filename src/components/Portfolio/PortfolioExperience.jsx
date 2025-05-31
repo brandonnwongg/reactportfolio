@@ -111,7 +111,7 @@ export const PortfolioExperience = () => {
 
   return (
     <>
-      {/* <Environment preset="sunset" /> */}
+      <Environment preset="sunset" />
       {/* <axesHelper /> */}
 
       <PortfolioAvatar />
@@ -214,7 +214,7 @@ export const PortfolioExperience = () => {
             scale={1.5}
             position={[-3, 2, 0]}
           />
-          <group position-x={2}>
+          <group position={[-1.5, 0, 4]}>
             <SectionTitle position-y={1}>PERSONAL</SectionTitle>
             <SectionTitle>PROJECTS</SectionTitle>
           </group>
@@ -231,7 +231,7 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          {/* <SectionTitle>CONTACT</SectionTitle> */}
+          <SectionTitle position-y={3.5}>CONTACT</SectionTitle>
         </motion.group>
       </motion.group>
     </>

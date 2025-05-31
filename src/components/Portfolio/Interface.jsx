@@ -25,6 +25,19 @@ export const Interface = () => {
     setHasScrolled(scrollData.offset > 0);
   });
 
+  const [comments, setComments] = useState([]);
+  const [name, setName] = useState("");
+  const [text, setText] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name.trim() && text.trim()) {
+      setComments([...comments, { name, text }]);
+      setName("");
+      setText("");
+    }
+  };
+
   return (
     <div className="interface">
       <div className="sections">
@@ -37,35 +50,7 @@ export const Interface = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1, delay: 2 }}
             >
-              <div className="contact__socials">
-                <a href={config.Contact.socials.linkedin} target="_blank">
-                  <img
-                    className="contact__socials__icon"
-                    src="images/linkedin.png"
-                    alt="linkedin"
-                  />
-                </a>
-                <a href={config.Contact.socials.github} target="_blank">
-                  <img
-                    className="contact__socials__icon"
-                    src="images/github.png"
-                    alt="git"
-                  />
-                </a>
-                <a href={`mailto:${config.Contact.mail}`} target="_blank">
-                  <img
-                    className="contact__socials__icon"
-                    src="images/email.png"
-                    alt="email"
-                  />
-                </a>
-              </div>
-              {Object.entries(config.Home).map(([key, value]) => (
-                <div className="home-info-line" key={key}>
-                  <span className="home-label">{key}:</span>
-                  <span className="home-value">{value}</span>
-                </div>
-              ))}
+              <p className="home-text">{config.Home.Text}</p>
             </motion.div>
             <motion.div
               className="scroll-down"
@@ -241,7 +226,7 @@ export const Interface = () => {
             ))}
           </motion.div>
         </section>
-        <section className="section section--left">
+        <section className="section section--left--contact">
           <motion.div
             className="contact"
             whileInView={"visible"}
@@ -254,13 +239,85 @@ export const Interface = () => {
               },
             }}
           >
-            {/* <h1 className="contact__name">{config.Contact.name}</h1> */}
-            {/* <div className="contact__socials">
-              <a href={config.Contact.socials.linkedin} target="_blank"></a>
-              <a href={config.Contact.socials.github} target="_blank"></a>
-              <a href={`mailto:${config.Contact.mail}`} target="_blank"></a>
-            </div> */}
+            <h1 className="contact__name">{config.Contact.contactname}</h1>
+            <p className="contact__address">{config.Contact.address}</p>
+            <br />
+            <div className="contact__socials">
+              <a href={config.Contact.socials.linkedin} target="_blank">
+                <img
+                  className="contact__socials__icon"
+                  src="images/linkedin.png"
+                  alt="linkedin"
+                />
+              </a>
+              <a href={config.Contact.socials.github} target="_blank">
+                <img
+                  className="contact__socials__icon"
+                  src="images/github.png"
+                  alt="git"
+                />
+              </a>
+              <a href={`mailto:${config.Contact.mail}`} target="_blank">
+                <img
+                  className="contact__socials__icon"
+                  src="images/email.png"
+                  alt="email"
+                />
+              </a>
+              <a href={config.Contact.socials.insta} target="_blank">
+                <img
+                  className="contact__socials__icon"
+                  src="images/insta.png"
+                  alt="insta"
+                />
+              </a>
+              <a href={config.Contact.socials.cv} target="_blank">
+                <img
+                  className="contact__socials__icon"
+                  src="images/cv.png"
+                  alt="cv"
+                />
+              </a>
+            </div>
+            <p className="contact__comment">{config.Contact.comment}</p>
+            <form className="comment-form" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="comment-input"
+                maxLength={10}
+              />
+              <input
+                type="text"
+                placeholder="Comment"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className="comment-input"
+                maxLength={30}
+              />
+              <button type="submit" className="comment-submit">
+                Submit
+              </button>
+            </form>
           </motion.div>
+          <div className="comment-strip">
+            {comments.map((comment, index) => (
+              <div key={index} className="comment-marquee">
+                <div className="comment-scroll">
+                  <span className="comment-name">
+                    {comment.name.charAt(0).toUpperCase() +
+                      comment.name.slice(1)}
+                  </span>
+                  <br />
+                  <span className="comment-says">&nbsp;says:&nbsp;</span>
+                  <br />
+                  <span className="comment-text">{comment.text}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </div>
