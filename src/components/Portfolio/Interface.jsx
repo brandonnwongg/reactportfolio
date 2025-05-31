@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { config } from "../../config";
 import { atom } from "jotai";
 import { useAtom } from "jotai";
+import { useMobile } from "../../hooks/useMobile";
 
 const categories = [
   { label: "Programming Languages", key: "programmingLanguages" },
@@ -38,12 +39,14 @@ export const Interface = () => {
     }
   };
 
+  const { isMobile } = useMobile();
+
   return (
     <div className="interface">
       <div className="sections">
         {/* HOME SECTION */}
-        <section className="section section--right">
-          <div>
+        <section className="section section--right mobile--section--bottom">
+          <div className="home-wrapper">
             <motion.div
               className="home"
               initial={{ opacity: 0 }}
@@ -52,6 +55,7 @@ export const Interface = () => {
             >
               <p className="home-text">{config.Home.Text}</p>
             </motion.div>
+
             <motion.div
               className="scroll-down"
               initial={{ opacity: 0 }}
@@ -67,17 +71,21 @@ export const Interface = () => {
                   repeatType: "reverse",
                   repeat: Infinity,
                 }}
-              ></motion.div>
+              />
             </motion.div>
           </div>
         </section>
         {/* SKILLS */}
-        <section className="section section--right">
+        <section className="section section--bottom  mobile--section--bottom">
           <motion.div
             className="skills"
             whileInView="visible"
             initial="hidden"
-            viewport={{ amount: 0.1, once: false }}
+            viewport={{
+              amount: 0.1,
+              once: false,
+              margin: isMobile ? "-70px 0px 0px 0px" : undefined,
+            }}
             variants={{
               hidden: {},
               visible: {
@@ -139,7 +147,7 @@ export const Interface = () => {
         </section>
 
         {/* ACADEMIC PROJECTS */}
-        <section className="section section--left">
+        <section className="section section--bottom mobile--section--bottom">
           <motion.div
             className="academics"
             whileInView={"visible"}
@@ -151,6 +159,9 @@ export const Interface = () => {
                 opacity: 1,
               },
             }}
+            viewport={{
+              margin: isMobile ? "-70px 0px 0px 0px" : undefined,
+            }}
           >
             {config.AcademicProjects.map((project, idx) => (
               <motion.div
@@ -161,7 +172,7 @@ export const Interface = () => {
                 variants={{
                   visible: { opacity: 1 },
                 }}
-                transition={{ duration: 1, delay: idx * 0.5 }}
+                transition={{ duration: 1, delay: isMobile ? 0 : idx * 0.5 }}
               >
                 <a href={project.link} target="_blank">
                   <img
@@ -188,7 +199,7 @@ export const Interface = () => {
         </section>
 
         {/* PERSONAL PROJECTS */}
-        <section className="section section--right">
+        <section className="section section--right mobile--section--bottom">
           <motion.div
             className="personal"
             whileInView={"visible"}
@@ -199,6 +210,9 @@ export const Interface = () => {
               visible: {
                 opacity: 1,
               },
+            }}
+            viewport={{
+              margin: isMobile ? "-70px 0px 0px 0px" : undefined,
             }}
           >
             {config.PersonalProjects.map((project, idx) => (
@@ -226,7 +240,7 @@ export const Interface = () => {
             ))}
           </motion.div>
         </section>
-        <section className="section section--left--contact">
+        <section className="section section--left--contact mobile--section--bottom--contact">
           <motion.div
             className="contact"
             whileInView={"visible"}
@@ -237,6 +251,9 @@ export const Interface = () => {
               visible: {
                 opacity: 1,
               },
+            }}
+            viewport={{
+              margin: isMobile ? "-70px 0px 0px 0px" : undefined,
             }}
           >
             <h1 className="contact__name">{config.Contact.contactname}</h1>

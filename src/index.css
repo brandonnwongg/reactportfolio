@@ -35,20 +35,28 @@ button {
   max-width: 1200px;
   width: 100%;
 }
-
 .section {
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 2rem;
+  /* overflow-x: hidden; */
+  scrollbar-width: none;
 }
 
+.section::-webkit-scrollbar {
+  display: none;
+}
 .section--top {
   align-items: flex-start;
 }
 
 .section--bottom {
   align-items: flex-end;
+  min-height: 100vh;
+  padding-top: 0px;
 }
 
 .section--right {
@@ -66,7 +74,7 @@ button {
 
 /* HOME SECTION */
 .home {
-  padding: 2rem;
+  padding: 7rem;
 }
 
 .home-text {
@@ -75,8 +83,8 @@ button {
     0 -5px 0 0 white, 0 5px 0 0 white;
   margin: 1.5rem 0;
   color: white;
-  background: rgba(249, 249, 249, 0.1);
-  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
   max-width: 300px;
   transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
 }
@@ -114,31 +122,34 @@ button {
 }
 
 /* SKILLS */
-/* 
-.skills {
-  padding: 1rem;
-  flex-direction: column;
-} phone */
 
 .skills {
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  max-width: 100%;
+  overflow-x: auto;
+  width: 100%;
 }
 
 .skill-category {
-  margin: 1.5rem 0;
+  margin: 1.5rem 1.5rem;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5), -5px 0 0 0 white, 5px 0 0 0 white,
     0 -5px 0 0 white, 0 5px 0 0 white;
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(1px);
-
+  min-width: 480px;
   color: white;
-  max-width: 100%;
+  /* max-width: 100%; */
   font-size: 2rem;
   text-align: center;
+  overflow-x: auto;
   transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
+}
+
+.skills::-webkit-scrollbar {
+  display: none;
 }
 
 .skill-category:hover {
@@ -188,13 +199,22 @@ button {
 /* ACADEMIC PROJECTYS */
 
 .academics {
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  padding: 7rem;
+  /* display: grid; */
+  /* grid-template-columns: repeat(3, 1fr); */
+  /* grid-template-columns: repeat(auto-fit, 220px); */
   width: 550px;
   max-width: 100%;
-  justify-content: center;
-  gap: 2rem;
+  /* justify-content: center; */
+  gap: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.academics::-webkit-scrollbar {
+  display: none;
 }
 
 .academic-project {
@@ -204,6 +224,7 @@ button {
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
   overflow: hidden;
+  min-width: 220px;
   transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
 }
 
@@ -259,13 +280,13 @@ button {
 /* PERSONAL PROJECTS */
 
 .personal {
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 380px);
-  width: 550px;
+  padding: 5rem;
+  display: column;
+  /* grid-template-columns: repeat(auto-fit, 220px); */
+  width: 300px;
   max-width: 100%;
-  justify-content: center;
-  gap: 2rem;
+  /* justify-content: center; */
+  /* gap: 2rem; */
 }
 
 .personal-project {
@@ -275,6 +296,8 @@ button {
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
   overflow: hidden;
+  gap: 2rem;
+  margin: 2rem;
   transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
 }
 
@@ -493,12 +516,12 @@ button {
   font-weight: bold;
   font-size: 1rem;
   color: #333;
-  letter-spacing: 3px;
+  letter-spacing: 10px;
 }
 
 .menu__buttons {
   display: flex;
-  gap: 1rem; /* Default large screen */
+  gap: 1rem;
   align-items: center;
 }
 
@@ -515,4 +538,114 @@ button {
 
 .contact {
   width: 100%;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 990px) {
+  .mobile--section--top {
+    align-items: flex-start;
+  }
+
+  .mobile--section--bottom {
+    align-items: flex-end;
+    min-height: 100vh;
+    padding-top: 0px;
+  }
+
+  .mobile--section--bottom--contact {
+    align-items: flex-end;
+    padding-top: 100px;
+  }
+
+  .mobile--section--right {
+    justify-content: flex-end;
+  }
+
+  .mobile--section--left {
+    justify-content: flex-start;
+  }
+
+  .home {
+    padding: 2.5rem;
+    scale: 0.7;
+    /* margin-top: 150px; */
+  }
+
+  .home-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scroll-down {
+    margin-top: 400px;
+    scale: 0.7;
+  }
+
+  .skills {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .skill {
+    scale: 0.6;
+  }
+
+  .skill-category {
+    min-width: 300px;
+  }
+
+  .academics {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+    width: 100%;
+    padding: 0rem;
+  }
+
+  .academic-project {
+    min-width: 220px;
+    scale: 0.8;
+  }
+
+  .personal {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+    width: 100%;
+    padding: 0rem;
+  }
+
+  .personal-project {
+    min-width: 220px;
+    scale: 0.8;
+  }
+
+  .contact {
+    scale: 0.7;
+    width: 100%;
+  }
+
+  .comment-form {
+    gap: 0.2rem;
+  }
+
+  .comment-marquee {
+    scale: 0.7;
+    margin-top: 0.1rem;
+  }
+
+  .menu {
+    flex-direction: column;
+    gap: 0rem;
+    font-size: 0.8rem;
+    left: 0.3rem;
+    right: 0.3rem;
+    top: 0.2rem;
+    letter-spacing: 0.5px;
+  }
 }

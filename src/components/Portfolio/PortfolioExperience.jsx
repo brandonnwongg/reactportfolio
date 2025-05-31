@@ -14,6 +14,7 @@ import { motion } from "framer-motion-3d";
 import { animate, useMotionValue } from "framer-motion";
 import { PortfolioTV } from "./PortfolioTV";
 import { PortfolioLaptop } from "./PortfolioLaptop";
+import { useMobile } from "../../hooks/useMobile";
 
 const SECTIONS_DISTANCE = 15;
 
@@ -75,43 +76,25 @@ export const PortfolioExperience = () => {
       lastSectionIndex.current = currentIndex;
       setSection(config.sections[currentIndex]);
     }
-
-    sceneContainer.current.position.z =
-      -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+    if (isMobile) {
+      sceneContainer.current.position.x =
+        -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+      sceneContainer.current.position.z = 0;
+    } else {
+      sceneContainer.current.position.z =
+        -scrollData.offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
+      sceneContainer.current.position.x = 0;
+    }
 
     camera.position.set(cameraX.get(), cameraY.get(), cameraZ.get());
     camera.lookAt(lookAtX.get(), 0, -2);
   });
 
-  // const sectionRanges = [
-  //   { name: "Home", start: 0, end: 0.1 },
-  //   { name: "Skills", start: 0.1, end: 0.3 },
-  //   { name: "AcademicProjects", start: 0.3, end: 0.68 },
-  //   { name: "PersonalProjects", start: 0.68, end: 0.84 },
-  //   { name: "Contact", start: 0.84, end: 1 },
-  // ];
-
-  // useFrame(() => {
-  //   const offset = scrollData.offset;
-
-  //   const current = sectionRanges.find((range) => {
-  //     return offset >= range.start && offset < range.end;
-  //   });
-
-  //   if (current && current.name !== section) {
-  //     setSection(current.name);
-  //   }
-
-  //   sceneContainer.current.position.z =
-  //     -offset * SECTIONS_DISTANCE * (scrollData.pages - 1);
-
-  //   camera.position.set(cameraX.get(), cameraY.get(), cameraZ.get());
-  //   camera.lookAt(lookAtX.get(), 0, -2);
-  // });
+  const { isMobile } = useMobile();
 
   return (
     <>
-      <Environment preset="sunset" />
+      {/* <Environment preset="sunset" /> */}
       {/* <axesHelper /> */}
 
       <PortfolioAvatar />
@@ -150,18 +133,24 @@ export const PortfolioExperience = () => {
           }}
         >
           <PortfolioHome
-            rotation-y={-0.75}
-            position={[-3.5, 0.3, -0.3]}
+            rotation-y={isMobile ? -1.6 : -0.75}
+            position={isMobile ? [-2.5, 0, -2] : [-3.5, 0.3, -0.3]}
             scale={0.7}
           />
-          <SectionTitle rotation-y={0.75} position-z={0.5} position-y={0.5}>
+          <SectionTitle
+            rotation-y={isMobile ? 0 : 0.75}
+            position-z={0.5}
+            position-x={isMobile ? 2 : 0}
+            position-y={isMobile ? 2 : 0.5}
+            scale={isMobile ? 0.8 : 1}
+          >
             HOME
           </SectionTitle>
         </motion.group>
         {/* SKILLS */}
         <motion.group
-          position-z={SECTIONS_DISTANCE}
-          position-x={1.5}
+          position-x={isMobile ? SECTIONS_DISTANCE : 1.5}
+          position-z={isMobile ? -4 : SECTIONS_DISTANCE}
           position-y={-3.5}
           transition={sceneTransition}
           variants={{
@@ -170,15 +159,22 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <Brain />
-          <SectionTitle position-x={0.5} rotation-y={-0.25}>
-            SKILLS
-          </SectionTitle>
+          <group position-x={isMobile ? 5 : 0}>
+            <Brain />
+            <SectionTitle
+              position-x={0.5}
+              position-y={isMobile ? 1 : 1.5}
+              rotation-y={-0.25}
+            >
+              SKILLS
+            </SectionTitle>
+          </group>
         </motion.group>
         {/* ACADMEIC PROJECTS */}
         <motion.group
           scale={0.5}
-          position-z={2 * SECTIONS_DISTANCE}
+          position-x={isMobile ? 2 * SECTIONS_DISTANCE : 0}
+          position-z={isMobile ? -3 : 2 * SECTIONS_DISTANCE}
           position-y={-7}
           transition={sceneTransition}
           variants={{
@@ -187,20 +183,23 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <PortfolioTV
-            scale={0.8}
-            position={[3, 0.45, 0]}
-            rotation={[0, -2.1, 0]}
-          />
-          <group position={[5, 0.5, 5]}>
-            <SectionTitle position-y={1}>ACADEMIC</SectionTitle>
-            <SectionTitle>PROJECTS</SectionTitle>
+          <group scale={isMobile ? 0.7 : 1} position-x={isMobile ? 0.3 : 0}>
+            <PortfolioTV
+              scale={0.8}
+              position={[-3, 0.45, -2]}
+              rotation={[0, -1.2, 0]}
+            />
+            <group position={[3, 2, 2]}>
+              <SectionTitle position-y={1}>ACADEMIC</SectionTitle>
+              <SectionTitle>PROJECTS</SectionTitle>
+            </group>
           </group>
         </motion.group>
         {/* PERSONAL PROJECTS */}
         <motion.group
+          position-x={isMobile ? 3 * SECTIONS_DISTANCE : 0}
+          position-z={isMobile ? -4 : 3 * SECTIONS_DISTANCE}
           scale={0.5}
-          position-z={3 * SECTIONS_DISTANCE}
           position-y={-3.5}
           transition={sceneTransition}
           variants={{
@@ -209,20 +208,23 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <PortfolioLaptop
-            rotation={[0, 0.5, 0]}
-            scale={1.5}
-            position={[-3, 2, 0]}
-          />
-          <group position={[-1.5, 0, 4]}>
-            <SectionTitle position-y={1}>PERSONAL</SectionTitle>
-            <SectionTitle>PROJECTS</SectionTitle>
+          <group position={isMobile ? [2.5, 1, 0] : [0, 0, 0]}>
+            <PortfolioLaptop
+              rotation={[0, 0.5, 0]}
+              scale={1.5}
+              position={[-3, 2, 0]}
+            />
+            <group position={[-1.5, 0, 4]}>
+              <SectionTitle position-y={1}>PERSONAL</SectionTitle>
+              <SectionTitle>PROJECTS</SectionTitle>
+            </group>
           </group>
         </motion.group>
         {/* CONTACT */}
         <motion.group
+          position-x={isMobile ? 4 * SECTIONS_DISTANCE : 0}
+          position-z={isMobile ? -4 : 4 * SECTIONS_DISTANCE}
           scale={0.8}
-          position-z={4 * SECTIONS_DISTANCE}
           position-y={-3.5}
           transition={sceneTransition}
           variants={{
@@ -231,7 +233,12 @@ export const PortfolioExperience = () => {
             },
           }}
         >
-          <SectionTitle position-y={3.5}>CONTACT</SectionTitle>
+          <SectionTitle
+            position-y={isMobile ? 4.2 : 2}
+            position-x={isMobile ? 1.5 : 3}
+          >
+            CONTACT
+          </SectionTitle>
         </motion.group>
       </motion.group>
     </>
