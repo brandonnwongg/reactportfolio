@@ -568,8 +568,8 @@ button {
 
   .home {
     padding: 2.5rem;
-    scale: 0.7;
-    /* margin-top: 150px; */
+    scale: 0.5;
+    margin-top: 150px;
   }
 
   .home-wrapper {
@@ -643,9 +643,125 @@ button {
     flex-direction: column;
     gap: 0rem;
     font-size: 0.8rem;
-    left: 0.3rem;
-    right: 0.3rem;
+    left: 0.2rem;
+    right: 0.2rem;
     top: 0.2rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+  }
+}
+
+/* based on my iphone 14 pro */
+@media (max-width: 450px) {
+  .mobile--section--top {
+    align-items: flex-start;
+  }
+
+  .mobile--section--bottom {
+    align-items: flex-end;
+    min-height: 100vh;
+    padding-top: 0px;
+  }
+
+  .mobile--section--bottom--contact {
+    align-items: flex-end;
+    padding-top: 100px;
+  }
+
+  .mobile--section--right {
+    justify-content: flex-end;
+  }
+
+  .mobile--section--left {
+    justify-content: flex-start;
+  }
+
+  .home {
+    padding: 2rem;
+    scale: 0.7;
+    /* margin-top: 150px; */
+  }
+
+  .home-text {
+    margin-top: 300px;
+  }
+
+  .home-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scroll-down {
+    margin-top: 220px;
+    scale: 0.5;
+  }
+
+  .skills {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    width: 100%;
+    justify-content: flex-start;
+    transform: translateY(-60px);
+  }
+
+  .skill {
+    scale: 0.6;
+  }
+
+  .skill-category {
+    min-width: 300px;
+  }
+
+  .academics {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+    width: 100%;
+    padding: 0rem;
+    transform: translateY(-70px);
+  }
+
+  .academic-project {
+    min-width: 220px;
+    scale: 0.8;
+  }
+
+  .personal {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+    width: 100%;
+    padding: 0rem;
+    transform: translateY(-60px);
+  }
+
+  .personal-project {
+    min-width: 220px;
+    scale: 0.8;
+  }
+
+  .contact {
+    scale: 0.7;
+    width: 100%;
+  }
+
+  .comment-form {
+    gap: 0.2rem;
+  }
+
+  .comment-marquee {
+    scale: 0.7;
+    margin-top: 0.1rem;
+  }
+
+  .menu {
+    flex-direction: column;
+    gap: 0rem;
+    font-size: 0.8rem;
+    left: 0.2rem;
+    right: 0.2rem;
+    top: 0.2rem;
+    letter-spacing: 0.3px;
   }
 }

@@ -1,6 +1,6 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { config } from "../../config";
 import { atom } from "jotai";
@@ -40,6 +40,20 @@ export const Interface = () => {
   };
 
   const { isMobile } = useMobile();
+
+  // rendering animation issue with comments when i use my phone
+  const commentStripRef = useRef(null);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (commentStripRef.current) {
+        commentStripRef.current.style.animation = "none";
+        void commentStripRef.current.offsetHeight;
+        commentStripRef.current.style.animation = "";
+      }
+    }, 1);
+
+    return () => clearTimeout(timeout);
+  }, [comments]);
 
   return (
     <div className="interface">
@@ -319,7 +333,7 @@ export const Interface = () => {
               </button>
             </form>
           </motion.div>
-          <div className="comment-strip">
+          <div className="comment-strip" ref={commentStripRef}>
             {comments.map((comment, index) => (
               <div key={index} className="comment-marquee">
                 <div className="comment-scroll">
