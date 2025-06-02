@@ -283,21 +283,22 @@ button {
 }
 
 /* PERSONAL PROJECTS */
-
-.horizontal-scroll-container-personal {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
+.personal-project-link-wrapper {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
 }
 
 .personal {
-  padding: 7rem;
+  padding: 5rem;
   width: 1000px;
   max-width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   overflow-x: auto;
   width: 100%;
+  gap: 2rem;
 }
 
 .personal::-webkit-scrollbar {
@@ -311,6 +312,7 @@ button {
   backdrop-filter: blur(8px);
   overflow: hidden;
   min-width: 220px;
+  max-width: 250px;
   transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.2s ease;
   padding: 0.5rem;
 }
@@ -343,12 +345,7 @@ button {
 }
 
 .personal-project-link {
-  color: #ffff00; /* neon yellow */
-  text-decoration: none;
-  font-weight: bold;
-  text-shadow: 0 0 5px #ffff00, 0 0 10px #ffea00, 0 0 20px #ffe100;
-  animation: flicker 2s infinite;
-  font-size: 1.5rem;
+  opacity: 0;
 }
 
 @keyframes flicker {
@@ -405,7 +402,7 @@ button {
 .contact__name {
   color: var(--text-color);
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 5rem;
   margin: 0;
 }
 
@@ -600,10 +597,18 @@ button {
   .mobile--section--bottom {
     align-items: flex-end;
     min-height: 100vh;
-    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .mobile--section--bottom--home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 30px;
+  }
+
+  .mobile--section--bottom--contact {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -648,7 +653,7 @@ button {
     overflow-x: auto;
     width: 100%;
     justify-content: flex-start;
-    transform: translateY(-60px);
+    transform: translateY(-80px);
   }
 
   .skill {
@@ -665,7 +670,7 @@ button {
     overflow-x: auto;
     width: 100%;
     padding: 0rem;
-    transform: translateY(-70px);
+    transform: translateY(-85px);
   }
 
   .academic-project {
@@ -679,7 +684,7 @@ button {
     overflow-x: auto;
     width: 100%;
     padding: 0rem;
-    transform: translateY(-60px);
+    transform: translateY(-90px);
   }
 
   .personal-project {
@@ -690,6 +695,10 @@ button {
   .contact {
     scale: 0.7;
     width: 100%;
+  }
+
+  .contact__name {
+    font-size: 4rem;
   }
 
   .comment-form {
@@ -743,4 +752,27 @@ button {
     transform: scale(1.2);
     filter: contrast(150%) brightness(1.5);
   }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+
+.overlay-content {
+  background: white;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px black;
+  font-size: 1.2rem;
+  text-align: center;
 }

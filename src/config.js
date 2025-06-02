@@ -8,7 +8,7 @@ export const config = {
     "Contact",
   ],
   Home: {
-    Text: "This website was built with React.js, three-fiber, and framer-motion. For 3D Object Modelling, I used Blender, Avatar using Ready Player Me, and Avatar Animation using Mixamo. Source Code is available on my Personal Project Section :), also check out Wawa Sensei on youtube to learn! ",
+    Text: "This website was developed with React.js, three-fiber, and framer-motion. For 3D Object Modelling, I used Blender, Avatar using Ready Player Me, and Avatar Animation using Mixamo. Source Code is available on my Personal Project Section :), also check out Wawa Sensei on youtube to learn! ",
   },
 
   Skills: {
@@ -144,8 +144,8 @@ export const config = {
     socials: {
       linkedin: "https://www.linkedin.com/in/wong-brandon1998/",
       github: "https://github.com/brandonnwongg",
-      insta: "https://github.com/brandonnwongg",
-      cv: "https://github.com/brandonnwongg",
+      insta: "https://www.instagram.com/brandonnwongg/",
+      cv: null,
     },
     mail: "wong_brandon@outlook.com",
   },

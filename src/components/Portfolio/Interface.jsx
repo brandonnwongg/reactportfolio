@@ -63,16 +63,6 @@ export const Interface = () => {
     setRerender,
   });
 
-  useScrollingCarousel({
-    width: personalWidth,
-    xTranslation: xPersonal,
-    duration,
-    mustFinish,
-    setMustFinish,
-    rerender,
-    setRerender,
-  });
-
   // mobile rendering project video since there isn't hover mode
   const [touchedProject, setTouchedProject] = useState(null);
 
@@ -96,25 +86,6 @@ export const Interface = () => {
     }
   };
 
-  // //will use  const projTitle = proj.title || proj.ptitle;  when i make videos
-  // const handlePersonalProjectInteraction = (proj, e) => {
-  //   if (isMobile) {
-  //     if (touchedProject !== proj.ptitle) {
-  //       e.preventDefault();
-  //       setTouchedProject(proj.ptitle);
-
-  //       setMustFinish(true);
-  //       setDuration(slowcarousel);
-
-  //       setTimeout(() => {
-  //         setTouchedProject(null);
-  //         setDuration(carouselduration);
-  //       }, 2000);
-
-  //       return;
-  //     }
-  //   }
-  // };
   // hover mode mobile rendering till here
 
   return (
@@ -328,36 +299,21 @@ export const Interface = () => {
               margin: isMobile ? "-70px 0px 0px 0px" : undefined,
             }}
           >
-            <motion.div
-              className="horizontal-scroll-container-personal"
-              ref={personalRef}
-              style={{ x: xPersonal }}
-              onHoverStart={() => {
-                setMustFinish(true);
-                setDuration(slowcarousel);
-              }}
-              onHoverEnd={() => {
-                setMustFinish(true);
-                setDuration(carouselduration);
-              }}
-            >
-              {[
-                ...config.PersonalProjects,
-                ...config.PersonalProjects,
-                // ...config.PersonalProjects,
-                // ...config.PersonalProjects,
-              ].map((project, idx) => (
-                <motion.div
-                  onClick={() => {
-                    if (project.plink) window.open(project.plink, "_blank");
-                  }}
-                  key={`${project.ptitle}-${idx}`}
-                  className="personal-project"
-                  initial={{ opacity: 0 }}
-                  variants={{
-                    visible: { opacity: 1 },
-                  }}
-                  transition={{ duration: 1, delay: idx * 0.5 }}
+            {config.PersonalProjects.map((project, idx) => (
+              <motion.div
+                key={project.ptitle}
+                className="personal-project"
+                initial={{ opacity: 0 }}
+                variants={{
+                  visible: { opacity: 1 },
+                }}
+                transition={{ duration: 1, delay: idx * 0.5 }}
+              >
+                <a
+                  href={project.pref}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="personal-project-link-wrapper"
                 >
                   <div className="personal-project-details">
                     <h3 className="personal-project-title">
@@ -366,15 +322,11 @@ export const Interface = () => {
                     <p className="personal-project-description">
                       {project.pdescription}
                     </p>
-                    <p className="project-tap-overlay">
-                      TAP TO
-                      <br />
-                      VIEW MORE
-                    </p>
+                    <p className="personal-project-link">{project.plink}</p>
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                </a>
+              </motion.div>
+            ))}
           </motion.div>
         </section>
         <section className="section section--left--contact mobile--section--bottom--contact">

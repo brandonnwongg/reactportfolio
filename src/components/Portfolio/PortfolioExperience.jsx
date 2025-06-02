@@ -234,7 +234,7 @@ export const PortfolioExperience = () => {
         >
           <SectionTitle
             position-y={isMobile ? 4.2 : 2}
-            position-x={isMobile ? 1.5 : 3}
+            position-x={isMobile ? 0.8 : 3}
           >
             CONTACT
           </SectionTitle>
