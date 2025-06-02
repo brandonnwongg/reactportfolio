@@ -94,7 +94,6 @@ export const PortfolioExperience = () => {
 
   return (
     <>
-      {/* <Environment preset="sunset" /> */}
       {/* <axesHelper /> */}
 
       <PortfolioAvatar />

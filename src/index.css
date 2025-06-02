@@ -528,6 +528,7 @@ button {
 .menu__button {
   font-weight: bold;
   color: black;
+  animation: flicker 2s infinite;
   text-decoration: none;
 }
 
@@ -676,7 +677,7 @@ button {
   }
 
   .home {
-    padding: 2rem;
+    padding: 2.5rem;
     scale: 0.5;
     /* margin-top: 150px; */
   }
@@ -692,8 +693,8 @@ button {
   }
 
   .scroll-down {
-    margin-top: 250px;
-    scale: 0.5;
+    margin-top: 9.5rem;
+    scale: 0.6;
   }
 
   .skills {
@@ -758,10 +759,11 @@ button {
   .menu {
     flex-direction: column;
     gap: 0rem;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
     left: 0.2rem;
     right: 0.2rem;
     top: 0.2rem;
     letter-spacing: 0.3px;
+    line-height: 0.3;
   }
 }

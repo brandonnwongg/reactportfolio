@@ -20,7 +20,24 @@ export const Interface = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const scrollData = useScroll();
 
+  // laptop rendering project video
   const [_project, setProject] = useAtom(projectAtom);
+
+  // mobile rendering project video since there isn't hover mode
+  const [touchedProject, setTouchedProject] = useState(null);
+
+  const handleProjectInteraction = (proj, e) => {
+    if (isMobile) {
+      if (touchedProject !== proj.title) {
+        e.preventDefault();
+        setProject(proj);
+        setTouchedProject(proj.title);
+        setTimeout(() => setTouchedProject(null), 1500);
+        return;
+      }
+    }
+  };
+  // till here
 
   useFrame(() => {
     setHasScrolled(scrollData.offset > 0);
@@ -179,7 +196,8 @@ export const Interface = () => {
           >
             {config.AcademicProjects.map((project, idx) => (
               <motion.div
-                onMouseEnter={() => setProject(project)}
+                onMouseEnter={() => !isMobile && setProject(project)}
+                onClick={(e) => handleProjectInteraction(project, e)}
                 key={project.title}
                 className="academic-project"
                 initial={{ opacity: 0 }}
@@ -198,10 +216,6 @@ export const Interface = () => {
                     <h3 className="academic-project-title">
                       -{project.title}-
                     </h3>
-                    {/* <h4 className="academic-project-module">
-                      Module: <br />
-                      {project.module}
-                    </h4> */}
                     <p className="academic-project-description">
                       {project.description}
                     </p>
