@@ -8,7 +8,7 @@ export const config = {
     "Contact",
   ],
   Home: {
-    Text: "Hi! I'm Brandon, 27 years old and currently doing my Bachelor's in Computer Science at HTW Berlin. Thanks for checking out my portfolio!",
+    Text: "This website was built with React.js, three-fiber, and framer-motion. For 3D Object Modelling, I used Blender, Avatar using Ready Player Me, and Avatar Animation using Mixamo. Source Code is available on my Personal Project Section :), also check out Wawa Sensei on youtube to learn! ",
   },
 
   Skills: {
@@ -82,7 +82,7 @@ export const config = {
       module: "Medizinische Bildverarbeitung",
       description:
         "Cell mitosis detection algorithm in Jupyter Notebook for medical image analysis using preprocessing and classification",
-      link: "-",
+      link: null,
     },
     {
       title: "improveBerlin",
@@ -125,20 +125,21 @@ export const config = {
   PersonalProjects: [
     {
       ptitle: "Portfolio",
-      pdescription:
-        "This portfolio was developed with React, three-fiber and framer-motion. Check out Wawa Sensei on Youtube!",
+      pdescription: "The project you are currently viewing!",
       pref: "https://github.com/brandonnwongg/reactportfolio",
+      plink: "https://github.com/brandonnwongg/reactportfolio",
     },
     {
       ptitle: "(Currently in Development) ",
       pdescription:
-        "An intelligent music recommendation tool that analyzes the tempo and energy of a given track to generate a curated playlist of songs with a similar vibe. ",
-      pref: "",
+        "A music recommendation tool that analyzes the tempo and energy of a given track to generate a curated playlist of songs with a similar vibe. ",
+      pref: null,
+      plink: null,
     },
   ],
 
   Contact: {
-    contactname: "Brandon Wong Shou Yuan",
+    contactname: "Brandon Wong",
     address: "Berlin, Germany",
     socials: {
       linkedin: "https://www.linkedin.com/in/wong-brandon1998/",
@@ -147,6 +148,5 @@ export const config = {
       cv: "https://github.com/brandonnwongg",
     },
     mail: "wong_brandon@outlook.com",
-    comment: "Leave a comment!",
   },
 };

@@ -1,11 +1,13 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef, use } from "react";
+import { motion, useMotionValue, animate } from "framer-motion";
 import { config } from "../../config";
 import { atom } from "jotai";
 import { useAtom } from "jotai";
 import { useMobile } from "../../hooks/useMobile";
+import useMeasure from "react-use-measure";
+import { useScrollingCarousel } from "../../hooks/useScrollingCarousel";
 
 const categories = [
   { label: "Programming Languages", key: "programmingLanguages" },
@@ -19,9 +21,57 @@ export const projectAtom = atom(config.AcademicProjects[0]);
 export const Interface = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const scrollData = useScroll();
+  const { isMobile } = useMobile();
 
   // laptop rendering project video
   const [_project, setProject] = useAtom(projectAtom);
+
+  // horizontal scrolling carousel
+  const [skillsRef, { width: skillsWidth }] = useMeasure();
+  const xSkills = useMotionValue(0);
+
+  const [academicsRef, { width: academicsWidth }] = useMeasure();
+  const xAcademics = useMotionValue(0);
+
+  const [personalRef, { width: personalWidth }] = useMeasure();
+  const xPersonal = useMotionValue(0);
+
+  const carouselduration = 25;
+  const slowcarousel = 500;
+
+  const [duration, setDuration] = useState(carouselduration);
+  const [mustFinish, setMustFinish] = useState(false);
+  const [rerender, setRerender] = useState(false);
+
+  useScrollingCarousel({
+    width: skillsWidth,
+    xTranslation: xSkills,
+    duration,
+    mustFinish,
+    setMustFinish,
+    rerender,
+    setRerender,
+  });
+
+  useScrollingCarousel({
+    width: academicsWidth,
+    xTranslation: xAcademics,
+    duration,
+    mustFinish,
+    setMustFinish,
+    rerender,
+    setRerender,
+  });
+
+  useScrollingCarousel({
+    width: personalWidth,
+    xTranslation: xPersonal,
+    duration,
+    mustFinish,
+    setMustFinish,
+    rerender,
+    setRerender,
+  });
 
   // mobile rendering project video since there isn't hover mode
   const [touchedProject, setTouchedProject] = useState(null);
@@ -32,51 +82,46 @@ export const Interface = () => {
         e.preventDefault();
         setProject(proj);
         setTouchedProject(proj.title);
-        setTimeout(() => setTouchedProject(null), 1500);
+
+        setMustFinish(true);
+        setDuration(slowcarousel);
+
+        setTimeout(() => {
+          setTouchedProject(null);
+          setDuration(carouselduration);
+        }, 2000);
+
         return;
       }
     }
   };
-  // till here
 
-  useFrame(() => {
-    setHasScrolled(scrollData.offset > 0);
-  });
+  // //will use  const projTitle = proj.title || proj.ptitle;  when i make videos
+  // const handlePersonalProjectInteraction = (proj, e) => {
+  //   if (isMobile) {
+  //     if (touchedProject !== proj.ptitle) {
+  //       e.preventDefault();
+  //       setTouchedProject(proj.ptitle);
 
-  const [comments, setComments] = useState([]);
-  const [name, setName] = useState("");
-  const [text, setText] = useState("");
+  //       setMustFinish(true);
+  //       setDuration(slowcarousel);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (name.trim() && text.trim()) {
-      setComments([...comments, { name, text }]);
-      setName("");
-      setText("");
-    }
-  };
+  //       setTimeout(() => {
+  //         setTouchedProject(null);
+  //         setDuration(carouselduration);
+  //       }, 2000);
 
-  const { isMobile } = useMobile();
-
-  // rendering animation issue with comments when i use my phone
-  const commentStripRef = useRef(null);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (commentStripRef.current) {
-        commentStripRef.current.style.animation = "none";
-        void commentStripRef.current.offsetHeight;
-        commentStripRef.current.style.animation = "";
-      }
-    }, 1);
-
-    return () => clearTimeout(timeout);
-  }, [comments]);
+  //       return;
+  //     }
+  //   }
+  // };
+  // hover mode mobile rendering till here
 
   return (
     <div className="interface">
       <div className="sections">
         {/* HOME SECTION */}
-        <section className="section section--right mobile--section--bottom">
+        <section className="section section--right mobile--section--bottom--home">
           <div className="home-wrapper">
             <motion.div
               className="home"
@@ -110,70 +155,84 @@ export const Interface = () => {
         <section className="section section--bottom  mobile--section--bottom">
           <motion.div
             className="skills"
-            whileInView="visible"
-            initial="hidden"
-            viewport={{
-              amount: 0.1,
-              once: false,
-              margin: isMobile ? "-70px 0px 0px 0px" : undefined,
+            whileInView={"visible"}
+            initial={{
+              opacity: 0,
             }}
             variants={{
-              hidden: {},
               visible: {
-                transition: {
-                  staggerChildren: 0.6,
-                  staggerDirection: -1,
-                },
+                opacity: 1,
               },
             }}
+            viewport={{
+              margin: isMobile ? "-70px 0px 0px 0px" : undefined,
+            }}
           >
-            {categories.map((category) => (
-              <motion.div
-                key={category.key}
-                className="skill-category"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: { opacity: 1 },
-                }}
-              >
-                <h2 className="category">{category.label}</h2>
-                <div className="skill-list">
-                  {config.Skills?.[category.key]?.map((skill, i) => (
-                    <motion.div
-                      key={skill.name}
-                      className="skill-item"
-                      variants={{
-                        hidden: { opacity: 0 },
-                        visible: { opacity: 1 },
-                      }}
-                    >
-                      <div className="skill-label">
-                        {skill.icon && (
-                          <i
-                            className={skill.icon}
-                            style={{
-                              fontSize: "25px",
-                              marginTop: "0.3rem",
-                              marginLeft: "0.5rem",
-                            }}
-                          />
-                        )}
-                        <h4 className="skill_label_name">{skill.name}</h4>
-                        <div className="skill_label_level">
-                          <motion.div
-                            className="skill_level_bar"
-                            variants={{
-                              hidden: { width: 0 },
-                              visible: { width: `${skill.level}%` },
-                            }}
-                          />
+            <motion.div
+              className="horizontal-scroll-container-skills"
+              ref={skillsRef}
+              style={{ x: xSkills }}
+              onHoverStart={() => {
+                setMustFinish(true);
+                setDuration(slowcarousel);
+              }}
+              onHoverEnd={() => {
+                setMustFinish(true);
+                setDuration(carouselduration);
+              }}
+            >
+              {[...categories, ...categories].map((category, idx) => (
+                <motion.div
+                  key={`${category.key}-${idx}`}
+                  className="skill-category"
+                  initial={{ opacity: 0 }}
+                  variants={{
+                    visible: { opacity: 1 },
+                  }}
+                  transition={{
+                    duration: 1,
+                    delay: isMobile ? 0 : idx * 0.5,
+                  }}
+                >
+                  <h2 className="category">{category.label}</h2>
+                  <div className="skill-list">
+                    {config.Skills?.[category.key]?.map((skill, i) => (
+                      <motion.div
+                        key={skill.name}
+                        className="skill-item"
+                        variants={{
+                          hidden: { opacity: 0 },
+                          visible: { opacity: 1 },
+                        }}
+                      >
+                        <div className="skill-label">
+                          {skill.icon && (
+                            <i
+                              className={skill.icon}
+                              style={{
+                                fontSize: "25px",
+                                marginTop: "0.3rem",
+                                marginLeft: "0.5rem",
+                              }}
+                            />
+                          )}
+                          <h4 className="skill_label_name">{skill.name}</h4>
+                          <div className="skill_label_level">
+                            <motion.div
+                              className="skill_level_bar"
+                              variants={{
+                                hidden: { width: 0 },
+                                visible: { width: `${skill.level}%` },
+                              }}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </section>
 
@@ -194,35 +253,61 @@ export const Interface = () => {
               margin: isMobile ? "-70px 0px 0px 0px" : undefined,
             }}
           >
-            {config.AcademicProjects.map((project, idx) => (
-              <motion.div
-                onMouseEnter={() => !isMobile && setProject(project)}
-                onClick={(e) => handleProjectInteraction(project, e)}
-                key={project.title}
-                className="academic-project"
-                initial={{ opacity: 0 }}
-                variants={{
-                  visible: { opacity: 1 },
-                }}
-                transition={{ duration: 1, delay: isMobile ? 0 : idx * 0.5 }}
-              >
-                <a href={project.link} target="_blank">
-                  <img
-                    className="academic-project-image"
-                    src={project.image}
-                    alt={project.title}
-                  />
-                  <div className="academic-project-details">
-                    <h3 className="academic-project-title">
-                      -{project.title}-
-                    </h3>
-                    <p className="academic-project-description">
-                      {project.description}
-                    </p>
-                  </div>
-                </a>
-              </motion.div>
-            ))}
+            <motion.div
+              className="horizontal-scroll-container-academics"
+              ref={academicsRef}
+              style={{ x: xAcademics }}
+              onHoverStart={() => {
+                setMustFinish(true);
+                setDuration(slowcarousel);
+              }}
+              onHoverEnd={() => {
+                setMustFinish(true);
+                setDuration(carouselduration);
+              }}
+            >
+              {[...config.AcademicProjects, ...config.AcademicProjects].map(
+                (project, idx) => (
+                  <motion.div
+                    onMouseEnter={() => !isMobile && setProject(project)}
+                    onClick={(e) => handleProjectInteraction(project, e)}
+                    key={`${project.title}-${idx}`}
+                    className="academic-project"
+                    initial={{ opacity: 0 }}
+                    variants={{
+                      visible: { opacity: 1 },
+                    }}
+                    transition={{
+                      duration: 1,
+                      delay: isMobile ? 0 : idx * 0.5,
+                    }}
+                  >
+                    <a href={project.link} target="_blank">
+                      <img
+                        className="academic-project-image"
+                        src={project.image}
+                        alt={project.title}
+                      />
+                      <div className="academic-project-details">
+                        <h3 className="academic-project-title">
+                          -{project.title}-
+                        </h3>
+                        <p className="academic-project-description">
+                          {project.description}
+                        </p>
+                        {touchedProject === project.title && (
+                          <p className="project-tap-overlay">
+                            TAP TO
+                            <br />
+                            VIEW MORE
+                          </p>
+                        )}
+                      </div>
+                    </a>
+                  </motion.div>
+                )
+              )}
+            </motion.div>
           </motion.div>
         </section>
 
@@ -243,17 +328,37 @@ export const Interface = () => {
               margin: isMobile ? "-70px 0px 0px 0px" : undefined,
             }}
           >
-            {config.PersonalProjects.map((project, idx) => (
-              <motion.div
-                key={project.ptitle}
-                className="personal-project"
-                initial={{ opacity: 0 }}
-                variants={{
-                  visible: { opacity: 1 },
-                }}
-                transition={{ duration: 1, delay: idx * 0.5 }}
-              >
-                <a href={project.pref} target="_blank">
+            <motion.div
+              className="horizontal-scroll-container-personal"
+              ref={personalRef}
+              style={{ x: xPersonal }}
+              onHoverStart={() => {
+                setMustFinish(true);
+                setDuration(slowcarousel);
+              }}
+              onHoverEnd={() => {
+                setMustFinish(true);
+                setDuration(carouselduration);
+              }}
+            >
+              {[
+                ...config.PersonalProjects,
+                ...config.PersonalProjects,
+                // ...config.PersonalProjects,
+                // ...config.PersonalProjects,
+              ].map((project, idx) => (
+                <motion.div
+                  onClick={() => {
+                    if (project.plink) window.open(project.plink, "_blank");
+                  }}
+                  key={`${project.ptitle}-${idx}`}
+                  className="personal-project"
+                  initial={{ opacity: 0 }}
+                  variants={{
+                    visible: { opacity: 1 },
+                  }}
+                  transition={{ duration: 1, delay: idx * 0.5 }}
+                >
                   <div className="personal-project-details">
                     <h3 className="personal-project-title">
                       -{project.ptitle}-
@@ -261,11 +366,15 @@ export const Interface = () => {
                     <p className="personal-project-description">
                       {project.pdescription}
                     </p>
-                    <p className="personal-project-link">{project.plink}</p>
+                    <p className="project-tap-overlay">
+                      TAP TO
+                      <br />
+                      VIEW MORE
+                    </p>
                   </div>
-                </a>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </section>
         <section className="section section--left--contact mobile--section--bottom--contact">
@@ -324,45 +433,7 @@ export const Interface = () => {
                 />
               </a>
             </div>
-            <p className="contact__comment">{config.Contact.comment}</p>
-            <form className="comment-form" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="comment-input"
-                maxLength={10}
-              />
-              <input
-                type="text"
-                placeholder="Comment"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                className="comment-input"
-                maxLength={30}
-              />
-              <button type="submit" className="comment-submit">
-                Submit
-              </button>
-            </form>
           </motion.div>
-          <div className="comment-strip" ref={commentStripRef}>
-            {comments.map((comment, index) => (
-              <div key={index} className="comment-marquee">
-                <div className="comment-scroll">
-                  <span className="comment-name">
-                    {comment.name.charAt(0).toUpperCase() +
-                      comment.name.slice(1)}
-                  </span>
-                  <br />
-                  <span className="comment-says">&nbsp;says:&nbsp;</span>
-                  <br />
-                  <span className="comment-text">{comment.text}</span>
-                </div>
-              </div>
-            ))}
-          </div>
         </section>
       </div>
     </div>
