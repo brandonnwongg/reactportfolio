@@ -8,7 +8,7 @@ import { motion } from "framer-motion-3d";
 //Tutorial from https://www.youtube.com/watch?v=OCjwL5QbiMg
 
 const PATHS = data.economics[0].paths;
-console.log(data.economics[0].paths);
+// console.log(data.economics[0].paths);
 
 const randomRange = (min, max) => Math.random() * (max - min) + min;
 let curves = [];

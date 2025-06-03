@@ -6,17 +6,11 @@ import { MouseHoverMovement } from "./components/MouseHoverMovement";
 import { MotionConfig } from "framer-motion";
 import { Interface } from "./components/Portfolio/Interface";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-// import StartingExperience from "./components/StartingScreen/StartingExperience";
 import { Menu } from "./components/Portfolio/Menu";
-import { LoadingScreen } from "./components/Portfolio/LoadingScreen";
-import { Suspense } from "react";
 
 function App() {
-  // const [showPortfolio, setShowPortfolio] = useState(false);
-
   return (
     <>
-      {/* <LoadingScreen /> */}
       <Canvas camera={{ position: [0, 0.5, 5], fov: 50 }}>
         <EffectComposer>
           <Bloom
@@ -27,29 +21,17 @@ function App() {
             mipmapBlur
           />
         </EffectComposer>
-        <color attach="background" args={["#000000"]} />
-        <fog attach="fog" args={["#000000", 100, 150]} />
+        <color attach="background" args={["#243407"]} />
+        <fog attach="fog" args={["#d0d9e6", 50, 300]} />
+        <fogExp2 attach="fog" args={["#d0d9e6", 0.003]} />
         <ambientLight intensity={6} />
         <MouseHoverMovement>
-          {/* {!showPortfolio && (
-            <StartingExperience onStart={() => setShowPortfolio(true)} />
-          )}
-
-          {showPortfolio && ( */}
           <ScrollControls
             pages={config.sections.length}
             damping={0.1}
             maxSpeed={0.2}
           >
-            <MotionConfig
-              transition={{
-                type: "spring",
-                mass: 5,
-                stiffness: 50,
-                damping: 1,
-                restDelta: 0.00001,
-              }}
-            >
+            <MotionConfig transition={{ duration: 1 }}>
               <group position-y={-1}>
                 <PortfolioExperience />
               </group>

@@ -78,29 +78,7 @@ export function PortfolioTV(props) {
   });
 
   return (
-    <group
-      {...props}
-      dispose={null}
-      scale={0.8}
-      position={[3, 0.45, 0]}
-      rotation={[0, -2.1, 0]}
-    >
-      <group
-        name="Cube"
-        position={[-0.055, 4.033, 0]}
-        scale={[-2.064, -3.672, -4.819]}
-      >
-        <mesh
-          name="Cube_1"
-          geometry={nodes.Cube_1.geometry}
-          material={materials.Material}
-        />
-        <mesh
-          name="Cube_2"
-          geometry={nodes.Cube_2.geometry}
-          material={materials["Material.003"]}
-        />
-      </group>
+    <group {...props} dispose={null}>
       <group
         name="Plane"
         position={[2.157, 0.911, -3.016]}
@@ -168,12 +146,22 @@ export function PortfolioTV(props) {
         material={materials["Material.006"]}
         position={[1.246, -0.14, 3.157]}
       />
-      {/* <mesh
-        name="Sphere"
-        geometry={nodes.Sphere.geometry}
-        material={materials["Material.007"]}
-        position={[-0.235, 6.335, 0.188]}
-      /> */}
+      <group
+        name="Cube001"
+        position={[0, 3.968, 0.037]}
+        scale={[1.918, 3.63, 4.151]}
+      >
+        <mesh
+          name="Cube002"
+          geometry={nodes.Cube002.geometry}
+          material={materials["Material.001"]}
+        />
+        <mesh
+          name="Cube002_1"
+          geometry={nodes.Cube002_1.geometry}
+          material={materials["Material.003"]}
+        />
+      </group>
     </group>
   );
 }

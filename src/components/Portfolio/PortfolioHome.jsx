@@ -24,9 +24,11 @@ export function PortfolioHome(props) {
   const bigCloudRef = useRef();
   const cloudHRef = useRef();
   const cloudLRef = useRef();
+  const cloudHReff = useRef();
+  const cloudLReff = useRef();
 
   useFrame((state, delta) => {
-    const clouds = [bigCloudRef, cloudHRef, cloudLRef];
+    const clouds = [bigCloudRef, cloudHRef, cloudLRef, cloudHReff, cloudLReff];
 
     clouds.forEach((cloudRef) => {
       if (cloudRef.current) {
@@ -43,9 +45,9 @@ export function PortfolioHome(props) {
   return (
     <group
       {...props}
-      rotation-y={-0.75}
+      // rotation-y={-0.75}
       // position={(-2.5, 1, 0)} mobile later
-      position={[-4.5, 0.1, 0]}
+      // position={[-4.5, 0.1, 0]}
       ref={groupRef}
       dispose={null}
     >
@@ -56,7 +58,7 @@ export function PortfolioHome(props) {
         floatingRange={[0, 0.2]}
       >
         <motion.group
-          position-y={50}
+          position-y={-15}
           transition={transition}
           variants={{
             Home: {
@@ -110,6 +112,23 @@ export function PortfolioHome(props) {
             />
           </group>
           <group
+            name="Floor"
+            position={[-2.949, 3.532, -4.941]}
+            rotation={[-0.493, 0, 0]}
+            scale={0.414}
+          >
+            <mesh
+              name="Plane001"
+              geometry={nodes.Plane001.geometry}
+              material={materials.seethru}
+            />
+            <mesh
+              name="Plane001_1"
+              geometry={nodes.Plane001_1.geometry}
+              material={materials["Material.016"]}
+            />
+          </group>
+          <group
             name="Chimney"
             position={[-2.949, 3.532, -4.941]}
             rotation={[-0.493, 0, 0]}
@@ -134,17 +153,16 @@ export function PortfolioHome(props) {
             scale={[2.129, 1, 1]}
           >
             <mesh
-              name="Sphere_1"
-              geometry={nodes.Sphere_1.geometry}
+              name="Sphere"
+              geometry={nodes.Sphere.geometry}
               material={materials.seethru}
             />
             <mesh
-              name="Sphere_2"
-              geometry={nodes.Sphere_2.geometry}
+              name="Sphere_1"
+              geometry={nodes.Sphere_1.geometry}
               material={materials["Material.001"]}
             />
           </group>
-
           <group
             ref={cloudHRef}
             name="CloudH"
@@ -179,37 +197,40 @@ export function PortfolioHome(props) {
               material={materials["Material.001"]}
             />
           </group>
-          <mesh
-            name="Sphere"
-            geometry={nodes.Sphere.geometry}
-            material={materials.Material}
-            position={[-2.65, 3.001, -3.609]}
-          />
-        </motion.group>
-        <motion.group
-          position-y={-10}
-          transition={transition}
-          variants={{
-            Home: {
-              y: 0,
-            },
-          }}
-        >
           <group
-            name="Floor"
-            position={[-2.949, 3.532, -4.941]}
-            rotation={[-0.493, 0, 0]}
-            scale={0.414}
+            ref={cloudHReff}
+            name="CloudL001"
+            position={[-2.285, 4.473, -5.503]}
+            rotation={[0.356, -0.043, -0.066]}
+            scale={-0.274}
           >
             <mesh
-              name="Plane001"
-              geometry={nodes.Plane001.geometry}
+              name="Sphere004"
+              geometry={nodes.Sphere004.geometry}
               material={materials.seethru}
             />
             <mesh
-              name="Plane001_1"
-              geometry={nodes.Plane001_1.geometry}
-              material={materials["Material.016"]}
+              name="Sphere004_1"
+              geometry={nodes.Sphere004_1.geometry}
+              material={materials["Material.001"]}
+            />
+          </group>
+          <group
+            ref={cloudLReff}
+            name="CloudH001"
+            position={[-2.669, 7.544, -5.58]}
+            rotation={[2.005, -0.367, -0.065]}
+            scale={-0.714}
+          >
+            <mesh
+              name="Sphere005"
+              geometry={nodes.Sphere005.geometry}
+              material={materials.seethru}
+            />
+            <mesh
+              name="Sphere005_1"
+              geometry={nodes.Sphere005_1.geometry}
+              material={materials["Material.001"]}
             />
           </group>
         </motion.group>

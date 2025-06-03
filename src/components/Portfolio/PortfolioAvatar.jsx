@@ -6,6 +6,7 @@ Command: npx gltfjsx@6.5.3 public/models/PortfolioAvatar.glb
 import { useAnimations, useFBX, useGLTF, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useEffect, useRef, useState } from "react";
+import { useMobile } from "../../hooks/useMobile";
 
 import * as THREE from "three";
 
@@ -130,14 +131,24 @@ export function PortfolioAvatar(props) {
 
   const scrollData = useScroll();
   const lastScroll = useRef(0);
+  const { isMobile } = useMobile();
 
   useFrame(() => {
     const scrollDelta = scrollData.offset - lastScroll.current;
+
+    let rotationTarget = 0;
 
     if (!startupComplete && Math.abs(scrollDelta) > 0.0001) {
       setStartupComplete(true);
       setCurrentStage(null);
       setAnimation("Walking");
+
+      if (scrollDelta > 0) {
+        rotationTarget = isMobile ? Math.PI / 2 : 0;
+      } else {
+        rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
+      }
+
       currentAction.current?.stop();
       return;
     }
@@ -146,9 +157,16 @@ export function PortfolioAvatar(props) {
       if (Math.abs(scrollDelta) > 0.0001) {
         setAnimation("Walking");
 
+        if (scrollDelta > 0) {
+          rotationTarget = isMobile ? Math.PI / 2 : 0;
+        } else {
+          rotationTarget = isMobile ? -Math.PI / 2 : Math.PI;
+        }
+
         group.current.rotation.y = THREE.MathUtils.lerp(
           group.current.rotation.y,
-          scrollDelta > 0 ? 0 : Math.PI,
+          // scrollDelta > 0 ? 0 : Math.PI,
+          rotationTarget,
           0.1
         );
       } else {

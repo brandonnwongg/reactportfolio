@@ -8,12 +8,7 @@ export const config = {
     "Contact",
   ],
   Home: {
-    Name: "Brandon Wong",
-    Age: "27",
-    "Date Of Birth": "1998-01-01",
-    Location: "Berlin, Germany",
-    Occupation: "Computer Science Student",
-    University: "HTW Berlin",
+    Text: "This website was developed with React.js, three-fiber, and framer-motion. For 3D Object Modelling, I used Blender, Avatar using Ready Player Me, and Avatar Animation using Mixamo. Source Code is available on my Personal Project Section :), also check out Wawa Sensei on youtube to learn! ",
   },
 
   Skills: {
@@ -87,7 +82,7 @@ export const config = {
       module: "Medizinische Bildverarbeitung",
       description:
         "Cell mitosis detection algorithm in Jupyter Notebook for medical image analysis using preprocessing and classification",
-      link: "-",
+      link: null,
     },
     {
       title: "improveBerlin",
@@ -130,25 +125,27 @@ export const config = {
   PersonalProjects: [
     {
       ptitle: "Portfolio",
-      pdescription:
-        "This portfolio is built with React, three-fiber, and Framer Motion. Some of the Models ive created using Blender and exported to GLTF format for use in the 3D scene, and some are downloaded from Sketchfab. Also, the animations are created using Mixamo and exported to FBX format for use in the 3D scene, and avatar from Ready Player Me. Alsooo, i learned a lot watching WAWA SENSEI's videos on YouTube, so check him out if you want to learn more about three-fiber :-)",
-      plink: "Click on this to check out the code on GitHub :-) Thank you!",
+      pdescription: "The project you are currently viewing!",
       pref: "https://github.com/brandonnwongg/reactportfolio",
+      plink: "https://github.com/brandonnwongg/reactportfolio",
     },
     {
       ptitle: "(Currently in Development) ",
       pdescription:
-        "An intelligent music recommendation tool that analyzes the tempo and energy of a given track to generate a curated playlist of songs with a similar vibe. ",
-      plink: "No link yet, sorry!",
-      pref: "",
+        "A music recommendation tool that analyzes the tempo and energy of a given track to generate a curated playlist of songs with a similar vibe. ",
+      pref: null,
+      plink: null,
     },
   ],
 
   Contact: {
-    name: "Brandon Wong Shou Yuan",
+    contactname: "Brandon Wong",
+    address: "Berlin, Germany",
     socials: {
       linkedin: "https://www.linkedin.com/in/wong-brandon1998/",
       github: "https://github.com/brandonnwongg",
+      insta: "https://www.instagram.com/brandonnwongg/",
+      cv: null,
     },
     mail: "wong_brandon@outlook.com",
   },
