@@ -1,5 +1,5 @@
 export const config = {
-  // loadingtitle: "Brandon's Portfolio",
+  loadingtitle: "Loading",
   sections: [
     "Home",
     "Skills",

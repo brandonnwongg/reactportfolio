@@ -7,10 +7,12 @@ import { MotionConfig } from "framer-motion";
 import { Interface } from "./components/Portfolio/Interface";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { Menu } from "./components/Portfolio/Menu";
+import { LoadingScreen } from "./components/Portfolio/LoadingScreen";
 
 function App() {
   return (
     <>
+      <LoadingScreen />
       <Canvas camera={{ position: [0, 0.5, 5], fov: 50 }}>
         <EffectComposer>
           <Bloom
