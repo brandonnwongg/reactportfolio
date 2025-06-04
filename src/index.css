@@ -807,25 +807,41 @@ button {
   }
 }
 
-.overlay {
+/* not available content overlay */
+.not-available-screen {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: all;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: white;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  place-items: center;
+  display: grid;
+  text-align: center;
 }
 
-.overlay-content {
-  background: white;
-  padding: 2rem 3rem;
-  border-radius: 1rem;
-  box-shadow: 0 0 20px black;
-  font-size: 1.2rem;
-  text-align: center;
+.not-available-screen__container {
+  width: 300px;
+  box-shadow: -5px 0 0 0 white, 5px 0 0 0 white, 0 -5px 0 0 white,
+    0 5px 0 0 white;
+  background-color: aliceblue;
+  backdrop-filter: blur(5px);
+  opacity: 0.5;
+}
+
+.not-available-screen__title,
+.not-available-screen__message {
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+  opacity: 1;
+}
+
+.not-available-screen--hidden {
+  pointer-events: none;
+  opacity: 0;
 }

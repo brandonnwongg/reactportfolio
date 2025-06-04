@@ -8,11 +8,16 @@ import { Interface } from "./components/Portfolio/Interface";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { Menu } from "./components/Portfolio/Menu";
 import { LoadingScreen } from "./components/Portfolio/LoadingScreen";
+import { NotAvailableScreen } from "./components/Portfolio/NotAvailableScreen";
+import React, { useState } from "react";
 
 function App() {
+  const [showNotAvailable, setShowNotAvailable] = useState(false);
+
   return (
     <>
       <LoadingScreen />
+      <NotAvailableScreen show={showNotAvailable} />
       <Canvas camera={{ position: [0, 0.5, 5], fov: 50 }}>
         <EffectComposer>
           <Bloom
@@ -41,7 +46,7 @@ function App() {
 
             <Scroll html>
               <MotionConfig transition={{ duration: 1 }}>
-                <Interface />
+                <Interface setShowNotAvailable={setShowNotAvailable} />
               </MotionConfig>
             </Scroll>
           </ScrollControls>
