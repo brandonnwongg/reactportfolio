@@ -117,7 +117,7 @@ export const config = {
       clip: "images/se2.png",
       module: "Software Engineering 2",
       description:
-        "Mastermind console game with Python, with the focus on TTD and Quality Assurance.",
+        "Mastermind console game with Python, with the focus on TDD and Quality Assurance.",
       link: "https://gitlab.rz.htw-berlin.de/s0580634/wise24-25_superhirn_22",
     },
   ],
@@ -145,7 +145,7 @@ export const config = {
       linkedin: "https://www.linkedin.com/in/wong-brandon1998/",
       github: "https://github.com/brandonnwongg",
       insta: "https://www.instagram.com/brandonnwongg/",
-      cv: null,
+      cv: "https://drive.google.com/file/d/1oNSmAgnXnqpYxkjkHQvN5F4G6hxPXHVT/view?usp=sharing",
     },
     mail: "wong_brandon@outlook.com",
   },
