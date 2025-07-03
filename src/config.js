@@ -130,11 +130,11 @@ export const config = {
       plink: "https://github.com/brandonnwongg/reactportfolio",
     },
     {
-      ptitle: "(Currently in Development) ",
+      ptitle: "brandonGPT",
       pdescription:
-        "A music recommendation tool that analyzes the tempo and energy of a given track to generate a curated playlist of songs with a similar vibe. ",
-      pref: null,
-      plink: null,
+        "A fun chatbot made for my friends trained to talk like me! Using LLaMA 3 8B via Groq API",
+      pref: "https://github.com/brandonnwongg/brandonGPT",
+      plink: "https://github.com/brandonnwongg/brandonGPT",
     },
   ],
 
