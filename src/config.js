@@ -145,7 +145,7 @@ export const config = {
       linkedin: "https://www.linkedin.com/in/wong-brandon1998/",
       github: "https://github.com/brandonnwongg",
       insta: "https://www.instagram.com/brandonnwongg/",
-      cv: "https://drive.google.com/file/d/1oNSmAgnXnqpYxkjkHQvN5F4G6hxPXHVT/view?usp=sharing",
+      cv: "https://drive.google.com/file/d/1_dSqvE2NKpgKgvjQJzSljeErxjNDaXiI/view",
     },
     mail: "wong_brandon@outlook.com",
   },
