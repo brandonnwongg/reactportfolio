@@ -18,7 +18,7 @@ const categories = [
 
 export const projectAtom = atom(config.AcademicProjects[0]);
 
-export const Interface = () => {
+export const Interface = ({ setShowNotAvailable }) => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const scrollData = useScroll();
   const { isMobile } = useMobile();
@@ -241,7 +241,15 @@ export const Interface = () => {
                 (project, idx) => (
                   <motion.div
                     onMouseEnter={() => !isMobile && setProject(project)}
-                    onClick={(e) => handleProjectInteraction(project, e)}
+                    onClick={(e) => {
+                      if (!project.link || project.link === "/notavailable") {
+                        e.preventDefault();
+                        setShowNotAvailable(true);
+                        setTimeout(() => setShowNotAvailable(false), 2000);
+                      } else {
+                        handleProjectInteraction(project, e);
+                      }
+                    }}
                     key={`${project.title}-${idx}`}
                     className="academic-project"
                     initial={{ opacity: 0 }}
@@ -270,7 +278,9 @@ export const Interface = () => {
                           <p className="project-tap-overlay">
                             TAP TO
                             <br />
-                            VIEW MORE
+                            VIEW
+                            <br />
+                            SOURCE CODE
                           </p>
                         )}
                       </div>
@@ -310,10 +320,17 @@ export const Interface = () => {
                 transition={{ duration: 1, delay: idx * 0.5 }}
               >
                 <a
-                  href={project.pref}
-                  target="_blank"
-                  rel="noreferrer noopener"
+                  href={project.pref || "#"}
+                  target={project.pref ? "_blank" : undefined}
+                  rel={project.pref ? "noreferrer noopener" : undefined}
                   className="personal-project-link-wrapper"
+                  onClick={(e) => {
+                    if (!project.pref) {
+                      e.preventDefault();
+                      setShowNotAvailable(true);
+                      setTimeout(() => setShowNotAvailable(false), 2000);
+                    }
+                  }}
                 >
                   <div className="personal-project-details">
                     <h3 className="personal-project-title">
@@ -377,7 +394,20 @@ export const Interface = () => {
                   alt="insta"
                 />
               </a>
-              <a href={config.Contact.socials.cv} target="_blank">
+              <a
+                href={config.Contact.socials.cv || "#"}
+                target={config.Contact.socials.cv ? "_blank" : undefined}
+                rel={
+                  config.Contact.socials.cv ? "noreferrer noopener" : undefined
+                }
+                onClick={(e) => {
+                  if (!config.Contact.socials.cv) {
+                    e.preventDefault();
+                    setShowNotAvailable(true);
+                    setTimeout(() => setShowNotAvailable(false), 2000);
+                  }
+                }}
+              >
                 <img
                   className="contact__socials__icon"
                   src="images/cv.png"

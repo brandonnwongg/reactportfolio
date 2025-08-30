@@ -1,5 +1,5 @@
 export const config = {
-  // loadingtitle: "Brandon's Portfolio",
+  loadingtitle: "Loading",
   sections: [
     "Home",
     "Skills",
@@ -117,7 +117,7 @@ export const config = {
       clip: "images/se2.png",
       module: "Software Engineering 2",
       description:
-        "Mastermind console game with Python, with the focus on TTD and Quality Assurance.",
+        "Mastermind console game with Python, with the focus on TDD and Quality Assurance.",
       link: "https://gitlab.rz.htw-berlin.de/s0580634/wise24-25_superhirn_22",
     },
   ],
@@ -130,11 +130,11 @@ export const config = {
       plink: "https://github.com/brandonnwongg/reactportfolio",
     },
     {
-      ptitle: "(Currently in Development) ",
+      ptitle: "brandonGPT",
       pdescription:
-        "A music recommendation tool that analyzes the tempo and energy of a given track to generate a curated playlist of songs with a similar vibe. ",
-      pref: null,
-      plink: null,
+        "A fun chatbot made for my friends trained to talk like me! Using LLaMA 3 8B via Groq API",
+      pref: "https://github.com/brandonnwongg/brandonGPT",
+      plink: "https://github.com/brandonnwongg/brandonGPT",
     },
   ],
 
@@ -145,7 +145,7 @@ export const config = {
       linkedin: "https://www.linkedin.com/in/wong-brandon1998/",
       github: "https://github.com/brandonnwongg",
       insta: "https://www.instagram.com/brandonnwongg/",
-      cv: null,
+      cv: "https://drive.google.com/file/d/1_dSqvE2NKpgKgvjQJzSljeErxjNDaXiI/view",
     },
     mail: "wong_brandon@outlook.com",
   },
